@@ -1,3 +1,5 @@
+import 'package:app/Screens/Login.dart';
+import 'package:app/Utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -8,10 +10,202 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  double getBiglDiameter(BuildContext context) =>
+      MediaQuery.of(context).size.width * 11 / 8;
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  bool _isObscurePassword = true;
+  bool _isObscureCPassword = true;
+  bool _isVisible = false;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Sign Up"),
+    return Scaffold(
+      backgroundColor: sideColorTheme,
+      body: Stack(
+        children: [
+          Positioned(
+            left: -getBiglDiameter(context) / 8,
+            top: -getBiglDiameter(context) / 8,
+            child: Container(
+              child: const Center(
+                child: Text(
+                  "Sign Up",
+                  style: TextStyle(
+                      fontFamily: "Pacifico",
+                      fontSize: 40,
+                      color: Colors.white),
+                ),
+              ),
+              width: getBiglDiameter(context),
+              height: getBiglDiameter(context),
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                      colors: [mainColorTheme, mainColorTheme],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter)),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ListView(
+              children: [
+                Container(
+                  width: 530,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Colors.white),
+                  margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        onTap: () {
+                          setState(() {
+                            _isVisible = false;
+                          });
+                        },
+                        controller:
+                            usernameController, // Controller for Username
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Username",
+                            contentPadding: EdgeInsets.all(20)),
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
+                      ),
+                      Divider(
+                        thickness: 2,
+                      ),
+                      TextFormField(
+                        onTap: () {
+                          setState(() {
+                            _isVisible = false;
+                          });
+                        },
+
+                        controller:
+                            passwordController, // Controller for Password
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Password",
+                            contentPadding: EdgeInsets.all(20),
+                            // Adding the visibility icon to toggle visibility of the password field
+                            suffixIcon: IconButton(
+                              color: mainColorTheme,
+                              icon: Icon(_isObscurePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              onPressed: () {
+                                setState(() {
+                                  _isObscurePassword = !_isObscurePassword;
+                                });
+                              },
+                            )),
+                        obscureText: _isObscurePassword,
+                      ),
+                      Divider(
+                        thickness: 2,
+                      ),
+                      TextFormField(
+                        onTap: () {
+                          setState(() {
+                            _isVisible = false;
+                          });
+                        },
+
+                        controller:
+                            confirmPasswordController, // Controller for Password
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Confirm Password",
+                            contentPadding: EdgeInsets.all(20),
+                            // Adding the visibility icon to toggle visibility of the password field
+                            suffixIcon: IconButton(
+                              color: mainColorTheme,
+                              icon: Icon(_isObscureCPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              onPressed: () {
+                                setState(() {
+                                  _isObscureCPassword = !_isObscureCPassword;
+                                });
+                              },
+                            )),
+                        obscureText: _isObscureCPassword,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: 40,
+                        child: Container(
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(20),
+                              splashColor: Colors.amber,
+                              onTap: () {},
+                              child: const Center(
+                                child: Text(
+                                  "Next",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: mainColorTheme),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "ALREADY HAVE AN ACCOUNT ? ",
+                      style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => Login()));
+                      },
+                      child: Text(
+                        " LOGIN",
+                        style: TextStyle(
+                            fontSize: 11,
+                            color: mainColorTheme,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
