@@ -93,7 +93,7 @@ class _LoginState extends State<Login> {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Password",
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: EdgeInsets.all(15),
                             // Adding the visibility icon to toggle visibility of the password field
                             suffixIcon: IconButton(
                               color: mainColorTheme,
