@@ -1,4 +1,3 @@
-import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
