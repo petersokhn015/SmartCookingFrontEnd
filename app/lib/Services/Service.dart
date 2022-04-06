@@ -1,6 +1,4 @@
 import 'package:app/Models/Recipe.dart';
-import 'package:app/Widgets/RecipeCard.dart';
-import 'package:flutter/material.dart';
 
 List<Recipe> recipes = [
   Recipe(
@@ -28,15 +26,4 @@ Future<List<Recipe>> getRecipes() async {
 
 Future<List<String>> getTags() async {
   return await tags;
-}
-
-Future<List<Widget>> getRecommendations() async {
-  List<Widget> recipesList = [];
-  for (int i = 0; i < 3; i++) {
-    recipesList.add(RecipeCard(
-        imageURL: recipes[i].imageURL,
-        recipeName: recipes[i].name,
-        ingredientCount: recipes[i].ingredientCount));
-  }
-  return recipesList;
 }

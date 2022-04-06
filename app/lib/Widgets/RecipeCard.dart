@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 class RecipeCard extends StatelessWidget {
   final String recipeName, imageURL;
   final int ingredientCount;
+  final double width, height;
   RecipeCard(
       {required this.imageURL,
       required this.recipeName,
-      required this.ingredientCount});
+      required this.ingredientCount,
+      required this.width,
+      required this.height});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
-      width: 130,
-      height: 200,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(15),
