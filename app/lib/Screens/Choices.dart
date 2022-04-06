@@ -1,5 +1,6 @@
 import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/Login.dart';
+import 'package:app/Screens/MainPage.dart';
 import 'package:app/Screens/SignUp.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
@@ -56,7 +57,7 @@ class _ChoicesState extends State<Choices> {
                 text: "Skip",
                 onClicked: () {
                   Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) => MainPage()));
                 })
           ]),
         ),
