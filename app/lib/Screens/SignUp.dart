@@ -23,7 +23,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: sideColorTheme,
+      backgroundColor: secondaryColor,
       body: Stack(
         children: [
           Positioned(
@@ -36,7 +36,7 @@ class _SignUpState extends State<SignUp> {
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 40,
-                      color: Colors.white),
+                      color: secondaryColor),
                 ),
               ),
               width: getBiglDiameter(context),
@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
-                      colors: [mainColorTheme, mainColorTheme],
+                      colors: [primaryColor, primaryColor],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter)),
             ),
@@ -57,7 +57,7 @@ class _SignUpState extends State<SignUp> {
                   width: 530,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Colors.white),
+                      color: secondaryColor),
                   margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
                   child: Column(
                     children: [
@@ -94,7 +94,7 @@ class _SignUpState extends State<SignUp> {
                             contentPadding: EdgeInsets.all(20),
                             // Adding the visibility icon to toggle visibility of the password field
                             suffixIcon: IconButton(
-                              color: mainColorTheme,
+                              color: primaryColor,
                               icon: Icon(_isObscurePassword
                                   ? Icons.visibility_off
                                   : Icons.visibility),
@@ -124,7 +124,7 @@ class _SignUpState extends State<SignUp> {
                             contentPadding: EdgeInsets.all(20),
                             // Adding the visibility icon to toggle visibility of the password field
                             suffixIcon: IconButton(
-                              color: mainColorTheme,
+                              color: primaryColor,
                               icon: Icon(_isObscureCPassword
                                   ? Icons.visibility_off
                                   : Icons.visibility),
@@ -162,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                                 child: Text(
                                   "Next",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: secondaryColor,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ),
@@ -170,7 +170,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: mainColorTheme),
+                              color: primaryColor),
                         ),
                       ),
                     ],
@@ -195,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                         " LOGIN",
                         style: TextStyle(
                             fontSize: 11,
-                            color: mainColorTheme,
+                            color: primaryColor,
                             fontWeight: FontWeight.w700),
                       ),
                     )

@@ -8,7 +8,7 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: mainColorTheme,
+      color: primaryColor,
       child: Center(child: Image(image: AssetImage(appLogo))),
     );
   }

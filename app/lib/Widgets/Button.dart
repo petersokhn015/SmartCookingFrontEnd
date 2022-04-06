@@ -11,14 +11,13 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: Size.fromHeight(50),
-          primary: Colors.white,
+          primary: secondaryColor,
           shape: StadiumBorder(),
         ),
-        
         child: FittedBox(
           child: Text(
             text,
-            style: TextStyle(fontSize: 20, color: mainColorTheme),
+            style: TextStyle(fontSize: 20, color: primaryColor),
           ),
         ),
         onPressed: onClicked,

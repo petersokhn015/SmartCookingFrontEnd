@@ -18,7 +18,7 @@ class _ChoicesState extends State<Choices> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        color: mainColorTheme,
+        color: primaryColor,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [

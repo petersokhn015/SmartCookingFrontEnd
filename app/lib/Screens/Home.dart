@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              //Top Image
               Row(
                 children: [
                   Stack(children: <Widget>[
@@ -35,6 +36,7 @@ class _HomeState extends State<Home> {
                         fit: BoxFit.fitWidth,
                       ),
                     ),
+                    //Top Text
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                       child: Container(
@@ -47,7 +49,7 @@ class _HomeState extends State<Home> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text("Welcome Back \n joteif",
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: secondaryColor,
                                       fontSize: 15,
                                     ),
                                     textAlign: TextAlign.center),
@@ -66,6 +68,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 40,
               ),
+              //Recommendation
               Column(
                 children: <Widget>[
                   Padding(
@@ -81,6 +84,7 @@ class _HomeState extends State<Home> {
                   Carousel()
                 ],
               ),
+              //Tags
               Row(children: <Widget>[
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,6 +110,7 @@ class _HomeState extends State<Home> {
                   ],
                 )
               ]),
+              //Current Recipes
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
@@ -125,13 +130,13 @@ class _HomeState extends State<Home> {
                           onPressed: () {},
                           child: Text(
                             'Browse',
-                            style:
-                                TextStyle(color: mainColorTheme, fontSize: 11),
+                            style: TextStyle(color: primaryColor, fontSize: 11),
                           )),
                     )
                   ],
                 ),
               ),
+              //Recipes
               Container(
                   height: MediaQuery.of(context).size.height / 4,
                   child: FutureBuilder<List<Recipe>>(

@@ -23,11 +23,11 @@ class _TagState extends State<Tag> {
   @override
   Widget build(BuildContext context) {
     if (widget.isActive) {
-      mainColor = mainColorTheme;
-      textColor = Colors.white;
+      mainColor = primaryColor;
+      textColor = secondaryColor;
     } else {
-      textColor = mainColorTheme;
-      mainColor = Colors.white;
+      textColor = primaryColor;
+      mainColor = secondaryColor;
     }
 
     return ConstrainedBox(
@@ -37,7 +37,7 @@ class _TagState extends State<Tag> {
             backgroundColor: mainColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            side: BorderSide(color: mainColorTheme)),
+            side: BorderSide(color: primaryColor)),
         child: Center(
           child: Text(
             widget.text,

@@ -1,3 +1,4 @@
+import 'package:app/Utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
@@ -43,7 +44,7 @@ class RecipeCard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         recipeName,
-                        style: TextStyle(fontSize: 10, color: Colors.white),
+                        style: TextStyle(fontSize: 10, color: secondaryColor),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -54,7 +55,7 @@ class RecipeCard extends StatelessWidget {
                         ingredientCount == 1
                             ? '$ingredientCount ingredient'
                             : '$ingredientCount ingredients',
-                        style: TextStyle(fontSize: 10, color: Colors.white),
+                        style: TextStyle(fontSize: 10, color: secondaryColor),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
