@@ -1,3 +1,4 @@
+import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/Login.dart';
 import 'package:app/Screens/SignUp.dart';
 import 'package:app/Utils/AppColors.dart';
@@ -13,7 +14,6 @@ class Choices extends StatefulWidget {
 }
 
 class _ChoicesState extends State<Choices> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,7 +28,7 @@ class _ChoicesState extends State<Choices> {
                 height: MediaQuery.of(context).size.height / 2,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(splashScreenLogo), fit: BoxFit.cover)),
+                        image: AssetImage(appLogo), fit: BoxFit.cover)),
               ),
             ),
             SizedBox(
@@ -43,14 +43,21 @@ class _ChoicesState extends State<Choices> {
             SizedBox(
               height: 30,
             ),
-            Button(text: "Sign Up", onClicked: () {
-              Navigator.pushReplacement(context,
+            Button(
+                text: "Sign Up",
+                onClicked: () {
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => SignUp()));
-            }),
+                }),
             SizedBox(
               height: 30,
             ),
-            Button(text: "Skip", onClicked: () {})
+            Button(
+                text: "Skip",
+                onClicked: () {
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                })
           ]),
         ),
       ),

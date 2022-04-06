@@ -1,4 +1,3 @@
-import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Cooking Panda',
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );

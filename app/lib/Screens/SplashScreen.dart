@@ -5,8 +5,6 @@ import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 
-
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -20,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(
-        const Duration(seconds: 5),
+        const Duration(seconds: 2),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Welcome())));
   }
@@ -38,8 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: MediaQuery.of(context).size.height / 2,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(splashScreenLogo),
-                      fit: BoxFit.cover)),
+                      image: AssetImage(appLogo), fit: BoxFit.cover)),
             ),
           ),
         ),
