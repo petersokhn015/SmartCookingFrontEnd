@@ -18,7 +18,7 @@ List<Recipe> recipes = [
       ingredientCount: 4)
 ];
 
-List<String> tags = ['Vegan', 'American', 'Gluten Free'];
+List<String> tags = ['Vegan', 'American', 'Main Course'];
 
 Future<List<Recipe>> getRecipes() async {
   return await recipes;

@@ -31,7 +31,7 @@ class _TagState extends State<Tag> {
     }
 
     return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: 100, maxHeight: 35),
+      constraints: BoxConstraints(maxHeight: 35, maxWidth: 120),
       child: TextButton(
         style: TextButton.styleFrom(
             backgroundColor: mainColor,

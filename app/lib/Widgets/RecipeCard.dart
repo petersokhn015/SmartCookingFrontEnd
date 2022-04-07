@@ -5,12 +5,14 @@ class RecipeCard extends StatelessWidget {
   final String recipeName, imageURL;
   final int ingredientCount;
   final double width, height;
+
   RecipeCard(
       {required this.imageURL,
       required this.recipeName,
       required this.ingredientCount,
       required this.width,
       required this.height});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +46,7 @@ class RecipeCard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         recipeName,
-                        style: TextStyle(fontSize: 10, color: secondaryColor),
+                        style: TextStyle(fontSize: 14, color: secondaryColor),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -55,7 +57,7 @@ class RecipeCard extends StatelessWidget {
                         ingredientCount == 1
                             ? '$ingredientCount ingredient'
                             : '$ingredientCount ingredients',
-                        style: TextStyle(fontSize: 10, color: secondaryColor),
+                        style: TextStyle(fontSize: 14, color: secondaryColor),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),

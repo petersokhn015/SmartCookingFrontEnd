@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
                                 child: Text("Welcome Back \n joteif",
                                     style: TextStyle(
                                       color: secondaryColor,
-                                      fontSize: 15,
+                                      fontSize: 18,
                                     ),
                                     textAlign: TextAlign.center),
                               ),
@@ -77,7 +77,8 @@ class _HomeState extends State<Home> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Recommended for you',
-                        style: TextStyle(fontWeight: FontWeight.w900),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w900, fontSize: 18),
                       ),
                     ),
                   ),
@@ -94,7 +95,8 @@ class _HomeState extends State<Home> {
                       child: Container(
                         child: Text(
                           'How are you feeling?',
-                          style: TextStyle(fontWeight: FontWeight.w900),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 18),
                         ),
                       ),
                     ),
@@ -121,7 +123,7 @@ class _HomeState extends State<Home> {
                       child: Text(
                         'What you might currently want',
                         style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 14),
+                            fontWeight: FontWeight.w900, fontSize: 18),
                       ),
                     ),
                     Expanded(
@@ -130,7 +132,7 @@ class _HomeState extends State<Home> {
                           onPressed: () {},
                           child: Text(
                             'Browse',
-                            style: TextStyle(color: primaryColor, fontSize: 11),
+                            style: TextStyle(color: primaryColor, fontSize: 13),
                           )),
                     )
                   ],
@@ -153,7 +155,7 @@ class _HomeState extends State<Home> {
                                 recipeName: snapshot.data![index].name,
                                 ingredientCount:
                                     snapshot.data![index].ingredientCount,
-                                width: 130,
+                                width: 150,
                                 height: 200,
                               );
                             },
