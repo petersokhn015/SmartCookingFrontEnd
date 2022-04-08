@@ -1,3 +1,16 @@
 const appLogo = "assets/CookingPanda.png";
 const chefPandaLogo = "assets/PandaChef.png";
 const homePageTopShape = "assets/HomePageTop.png";
+const lbl_Home = "Home";
+const lbl_Profile = "Profile";
+const lbl_Camera = "Camera";
+const lbl_Login = "Login";
+const lbl_SignUp = "Login";
+const txt_Login = "ALREADY HAVE AN ACCOUNT ? ";
+const txt_SignUp = "DON'T HAVE AN ACCOUNT ? ";
+const lbl_Username = "Username";
+const lbl_Password = "Password";
+const lbl_Confirm_Password = "Confirm Password";
+const lbl_Next = "Next";
+const lbl_Skip = "Skip";
+const lbl_Get_Started = "Get Started";

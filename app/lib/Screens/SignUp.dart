@@ -1,5 +1,6 @@
 import 'package:app/Screens/Login.dart';
 import 'package:app/Utils/AppColors.dart';
+import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -32,9 +33,9 @@ class _SignUpState extends State<SignUp> {
             child: Container(
               child: const Center(
                 child: Text(
-                  "Sign Up",
+                  lbl_SignUp,
                   style: TextStyle(
-                      fontFamily: "Pacifico",
+                      fontFamily: font_Pacifico,
                       fontSize: 40,
                       color: secondaryColor),
                 ),
@@ -71,7 +72,7 @@ class _SignUpState extends State<SignUp> {
                             usernameController, // Controller for Username
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Username",
+                            hintText: lbl_Username,
                             contentPadding: EdgeInsets.all(20)),
                         onEditingComplete: () =>
                             FocusScope.of(context).nextFocus(),
@@ -90,7 +91,7 @@ class _SignUpState extends State<SignUp> {
                             passwordController, // Controller for Password
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Password",
+                            hintText: lbl_Password,
                             contentPadding: EdgeInsets.all(20),
                             // Adding the visibility icon to toggle visibility of the password field
                             suffixIcon: IconButton(
@@ -120,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                             confirmPasswordController, // Controller for Password
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Confirm Password",
+                            hintText: lbl_Confirm_Password,
                             contentPadding: EdgeInsets.all(20),
                             // Adding the visibility icon to toggle visibility of the password field
                             suffixIcon: IconButton(
@@ -160,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                               onTap: () {},
                               child: const Center(
                                 child: Text(
-                                  "Next",
+                                  lbl_Next,
                                   style: TextStyle(
                                       color: secondaryColor,
                                       fontWeight: FontWeight.w700),
@@ -180,7 +181,7 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "ALREADY HAVE AN ACCOUNT ? ",
+                      txt_Login,
                       style: TextStyle(
                           fontSize: 11,
                           color: Colors.grey,
@@ -188,11 +189,11 @@ class _SignUpState extends State<SignUp> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(context,
+                        Navigator.of(context).push(
                             MaterialPageRoute(builder: (context) => Login()));
                       },
                       child: Text(
-                        " LOGIN",
+                        " "+lbl_Login,
                         style: TextStyle(
                             fontSize: 11,
                             color: primaryColor,
