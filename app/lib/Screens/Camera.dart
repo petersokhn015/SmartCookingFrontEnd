@@ -14,22 +14,7 @@ class _CameraState extends State<Camera> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: primaryColor,
-          title: Text(
-            lbl_Camera,
-            style: TextStyle(
-                color: secondaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 25),
-          ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ),
+        
         body: Text("Camera"),
       ),
     );
