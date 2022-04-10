@@ -27,7 +27,7 @@ ThemeData _DarkTheme =
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final _pageOptions = [Home(), Camera(), Profile()];
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,7 +46,7 @@ class _MainPageState extends State<MainPage> {
                   icon: Icon(isDark ? _iconDark : _iconLight)),
             ],
             centerTitle: true,
-            title: Image(image: AssetImage(appLogo),height: 60,),
+            title: Image(image: AssetImage(appLogoNoText),height: 80,),
           ),
           body: _pageOptions[_selectedIndex],
           bottomNavigationBar: BottomNavigationBar(

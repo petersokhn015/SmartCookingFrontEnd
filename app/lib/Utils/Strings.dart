@@ -1,4 +1,5 @@
 const appLogo = "assets/CookingPanda.png";
+const appLogoNoText = "assets/CookingPandaNoText.png";
 const chefPandaLogo = "assets/PandaChef.png";
 const homePageTopShape = "assets/HomePageTop.png";
 const profileBackgroundPicture = "assets/foodBackground.jpg";
