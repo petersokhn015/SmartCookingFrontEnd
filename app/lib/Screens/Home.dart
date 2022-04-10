@@ -151,10 +151,7 @@ class _HomeState extends State<Home> {
                             itemCount: snapshot.data?.length,
                             itemBuilder: (BuildContext context, int index) {
                               return RecipeCard(
-                                imageURL: snapshot.data![index].imageURL,
-                                recipeName: snapshot.data![index].name,
-                                ingredientCount:
-                                    snapshot.data![index].ingredientCount,
+                                recipe: snapshot.data![index],
                                 width: 150,
                                 height: 200,
                               );

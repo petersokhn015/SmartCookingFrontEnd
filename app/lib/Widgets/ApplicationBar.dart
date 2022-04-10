@@ -1,5 +1,3 @@
-import 'package:app/Utils/AppColors.dart';
-import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
@@ -7,10 +5,7 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: primaryColor,
-      child: Center(child: Image(image: AssetImage(appLogo))),
-    );
+    return AppBar();
   }
 
   @override

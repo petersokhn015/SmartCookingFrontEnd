@@ -30,10 +30,7 @@ class _CarouselState extends State<Carousel> {
                       itemBuilder:
                           (BuildContext context, int index, int realIndex) {
                         return RecipeCard(
-                          imageURL: snapshot.data![index].imageURL,
-                          recipeName: snapshot.data![index].name,
-                          ingredientCount:
-                              snapshot.data![index].ingredientCount,
+                          recipe: snapshot.data![index],
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height / 2,
                         );
