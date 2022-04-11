@@ -56,6 +56,7 @@ class _SignUpState extends State<SignUp> {
                 Container(
                   width: 530,
                   decoration: BoxDecoration(
+                    border: Border.all(color: primaryColor),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: secondaryColor),
                   margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
@@ -77,7 +78,8 @@ class _SignUpState extends State<SignUp> {
                             FocusScope.of(context).nextFocus(),
                       ),
                       Divider(
-                        thickness: 2,
+                        thickness: 1,
+                        color: primaryColor,
                       ),
                       TextFormField(
                         onTap: () {
@@ -107,7 +109,8 @@ class _SignUpState extends State<SignUp> {
                         obscureText: _isObscurePassword,
                       ),
                       Divider(
-                        thickness: 2,
+                        color: primaryColor,
+                        thickness: 1,
                       ),
                       TextFormField(
                         onTap: () {
@@ -156,7 +159,6 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              splashColor: Colors.amber,
                               onTap: () {},
                               child: const Center(
                                 child: Text(

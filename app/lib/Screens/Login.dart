@@ -58,11 +58,15 @@ class _LoginState extends State<Login> {
                   height: 140,
                   width: 530,
                   decoration: BoxDecoration(
+                    border: Border.all(color: primaryColor,style: BorderStyle.solid),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: secondaryColor),
                   margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 5,
+                      ),
                       TextFormField(
                         onTap: () {
                           setState(() {
@@ -73,13 +77,19 @@ class _LoginState extends State<Login> {
                             usernameController, // Controller for Username
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Username",
-                            contentPadding: EdgeInsets.all(20)),
+
+                            hintText: lbl_Username,
+                            contentPadding: EdgeInsets.all(15)),
+
                         onEditingComplete: () =>
                             FocusScope.of(context).nextFocus(),
                       ),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Divider(
-                        thickness: 3,
+                        color: primaryColor,
+                        thickness: 1,
                       ),
                       TextFormField(
                         onTap: () {
@@ -100,6 +110,7 @@ class _LoginState extends State<Login> {
                               icon: Icon(_isObscure
                                   ? Icons.visibility_off
                                   : Icons.visibility),
+                              iconSize: 20,
                               onPressed: () {
                                 setState(() {
                                   _isObscure = !_isObscure;
@@ -128,7 +139,6 @@ class _LoginState extends State<Login> {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              splashColor: Colors.amber,
                               onTap: () {},
                               child: const Center(
                                 child: Text(
@@ -141,8 +151,9 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: primaryColor),
+                            borderRadius: BorderRadius.circular(20),
+                            color: primaryColor,
+                          ),
                         ),
                       ),
                     ],
@@ -164,7 +175,7 @@ class _LoginState extends State<Login> {
                             MaterialPageRoute(builder: (context) => SignUp()));
                       },
                       child: Text(
-                        " SIGN UP",
+                        " " + lbl_SignUp,
                         style: TextStyle(
                             fontSize: 11,
                             color: primaryColor,
