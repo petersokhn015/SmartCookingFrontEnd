@@ -107,7 +107,9 @@ class _HomeState extends State<Home> {
                       Container(
                           width: MediaQuery.of(context).size.width - 20,
                           margin: EdgeInsets.all(10),
-                          child: TagsList())
+                          child: TagsList(
+                            tags: ["Vegan", "Amercian", "Gluten Free"],
+                          ))
                     ]),
                   ],
                 )
@@ -151,10 +153,7 @@ class _HomeState extends State<Home> {
                             itemCount: snapshot.data?.length,
                             itemBuilder: (BuildContext context, int index) {
                               return RecipeCard(
-                                imageURL: snapshot.data![index].imageURL,
-                                recipeName: snapshot.data![index].name,
-                                ingredientCount:
-                                    snapshot.data![index].ingredientCount,
+                                recipe: snapshot.data![index],
                                 width: 150,
                                 height: 200,
                               );

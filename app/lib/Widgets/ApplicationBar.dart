@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class ApplicationBar extends StatefulWidget {
   const ApplicationBar({Key? key}) : super(key: key);
 
-  @override
   State<ApplicationBar> createState() => _ApplicationBarState();
 }
 

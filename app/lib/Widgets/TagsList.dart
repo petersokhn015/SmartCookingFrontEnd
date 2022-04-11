@@ -3,7 +3,11 @@ import 'package:app/Widgets/Tag.dart';
 import 'package:flutter/material.dart';
 
 class TagsList extends StatefulWidget {
-  const TagsList({Key? key}) : super(key: key);
+  final List<String> tags;
+  const TagsList({
+    Key? key,
+    required this.tags,
+  }) : super(key: key);
 
   @override
   State<TagsList> createState() => _TagsListState();
@@ -12,21 +16,22 @@ class TagsList extends StatefulWidget {
 class _TagsListState extends State<TagsList> {
   @override
   Widget build(BuildContext context) {
+    List<Widget> tagsWidget = [];
+
+    for (var i = 0; i < widget.tags.length; i++) {
+      tagsWidget.add(new Tag(
+        text: widget.tags[i],
+        isActive: true,
+      ));
+    }
+
     return Container(
-        child: FutureBuilder<List<Widget>>(
-      future: getAllTags(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 5.0,
-              direction: Axis.horizontal,
-              children: snapshot.data!);
-        } else {
-          return Text('data');
-        }
-      },
-    ));
+        child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 5.0,
+            runSpacing: 5.0,
+            direction: Axis.horizontal,
+            children: tagsWidget));
   }
 
   Future<List<Widget>> getAllTags() async {
