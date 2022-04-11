@@ -1,4 +1,3 @@
-import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/Login.dart';
 import 'package:app/Screens/MainPage.dart';
 import 'package:app/Screens/SignUp.dart';
@@ -36,28 +35,28 @@ class _ChoicesState extends State<Choices> {
               height: 30,
             ),
             Button(
-                text: "Login",
+                text: lbl_Login,
                 onClicked: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Login()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Login()));
                 }),
             SizedBox(
               height: 30,
             ),
             Button(
-                text: "Sign Up",
+                text: lbl_SignUp,
                 onClicked: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => SignUp()));
                 }),
             SizedBox(
               height: 30,
             ),
             Button(
-                text: "Skip",
+                text: lbl_Skip,
                 onClicked: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => MainPage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MainPage()));
                 })
           ]),
         ),

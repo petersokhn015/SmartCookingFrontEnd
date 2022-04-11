@@ -1,3 +1,5 @@
+import 'package:app/Utils/AppColors.dart';
+import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 
 class Camera extends StatefulWidget {
@@ -12,6 +14,7 @@ class _CameraState extends State<Camera> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        
         body: Text("Camera"),
       ),
     );
