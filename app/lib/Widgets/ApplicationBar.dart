@@ -1,7 +1,7 @@
-import 'package:app/Utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationBar extends StatefulWidget {
+
   const ApplicationBar({Key? key}) : super(key: key);
 
   @override
@@ -44,5 +44,9 @@ ThemeData _DarkTheme =
             Navigator.of(context).pop();
           },
         ));
+
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(48);
 }

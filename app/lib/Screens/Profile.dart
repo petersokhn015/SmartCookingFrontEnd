@@ -1,7 +1,9 @@
+
 import 'package:app/Screens/MyPreferences.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/AccesButton.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -106,6 +108,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
             )),
+
       ),
     );
   }

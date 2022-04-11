@@ -33,9 +33,9 @@ class _LoginState extends State<Login> {
             child: Container(
               child: const Center(
                 child: Text(
-                  lbl_Login,
+                  "Login",
                   style: TextStyle(
-                      fontFamily: font_Pacifico,
+                      fontFamily: "Pacifico",
                       fontSize: 40,
                       color: secondaryColor),
                 ),
@@ -77,8 +77,10 @@ class _LoginState extends State<Login> {
                             usernameController, // Controller for Username
                         decoration: InputDecoration(
                             border: InputBorder.none,
+
                             hintText: lbl_Username,
                             contentPadding: EdgeInsets.all(15)),
+
                         onEditingComplete: () =>
                             FocusScope.of(context).nextFocus(),
                       ),
@@ -100,7 +102,7 @@ class _LoginState extends State<Login> {
                             passwordController, // Controller for Password
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: lbl_Password,
+                            hintText: "Password",
                             contentPadding: EdgeInsets.all(15),
                             // Adding the visibility icon to toggle visibility of the password field
                             suffixIcon: IconButton(
@@ -140,7 +142,7 @@ class _LoginState extends State<Login> {
                               onTap: () {},
                               child: const Center(
                                 child: Text(
-                                  lbl_Login,
+                                  "Login",
                                   style: TextStyle(
                                       color: secondaryColor,
                                       fontWeight: FontWeight.w700),
@@ -161,7 +163,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      txt_SignUp,
+                      "DON'T HAVE AN ACCOUNT ? ",
                       style: TextStyle(
                           fontSize: 11,
                           color: Colors.grey,
@@ -169,7 +171,7 @@ class _LoginState extends State<Login> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
+                        Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) => SignUp()));
                       },
                       child: Text(

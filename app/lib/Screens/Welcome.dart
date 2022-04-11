@@ -13,8 +13,8 @@ class Welcome extends StatefulWidget {
 
 class _WelcomeState extends State<Welcome> {
   void choicesPage() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Choices()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Choices()));
   }
 
   @override
@@ -37,7 +37,7 @@ class _WelcomeState extends State<Welcome> {
             SizedBox(
               height: 50,
             ),
-            Button(text: lbl_Get_Started, onClicked: choicesPage)
+            Button(text: "Get Started", onClicked: choicesPage)
           ]),
         ),
       ),

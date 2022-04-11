@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+
 const font_Pacifico = "Pacifico";
 const primaryColor = Color(0XFFDA1744);
+
 const secondaryColor = Color(0xFFEEEEEE);
 const tertiaryColor = Color(0xFF000000);
 
