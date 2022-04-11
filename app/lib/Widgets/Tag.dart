@@ -41,7 +41,7 @@ class _TagState extends State<Tag> {
         child: Center(
           child: Text(
             widget.text,
-            style: TextStyle(fontSize: 10, color: textColor),
+            style: TextStyle(fontSize: 14, color: textColor),
           ),
         ),
         onPressed: widget.voidCallback,

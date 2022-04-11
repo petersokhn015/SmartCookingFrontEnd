@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
                                 child: Text("Welcome Back \n joteif",
                                     style: TextStyle(
                                       color: secondaryColor,
-                                      fontSize: 18,
+                                      fontSize: 22,
                                     ),
                                     textAlign: TextAlign.center),
                               ),
@@ -78,12 +78,15 @@ class _HomeState extends State<Home> {
                       child: Text(
                         'Recommended for you',
                         style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 18),
+                            fontWeight: FontWeight.w900, fontSize: 22),
                       ),
                     ),
                   ),
                   Carousel()
                 ],
+              ),
+              SizedBox(
+                height: 10,
               ),
               //Tags
               Row(children: <Widget>[
@@ -96,7 +99,7 @@ class _HomeState extends State<Home> {
                         child: Text(
                           'How are you feeling?',
                           style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 18),
+                              fontWeight: FontWeight.w900, fontSize: 22),
                         ),
                       ),
                     ),
@@ -125,7 +128,7 @@ class _HomeState extends State<Home> {
                       child: Text(
                         'What you might currently want',
                         style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 18),
+                            fontWeight: FontWeight.w900, fontSize: 22),
                       ),
                     ),
                     Expanded(
@@ -134,7 +137,7 @@ class _HomeState extends State<Home> {
                           onPressed: () {},
                           child: Text(
                             'Browse',
-                            style: TextStyle(color: primaryColor, fontSize: 13),
+                            style: TextStyle(color: primaryColor, fontSize: 15),
                           )),
                     )
                   ],

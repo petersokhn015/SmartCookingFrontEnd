@@ -1,7 +1,7 @@
+import 'package:app/Utils/AppColors.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationBar extends StatefulWidget {
-
   const ApplicationBar({Key? key}) : super(key: key);
 
   @override
@@ -10,15 +10,15 @@ class ApplicationBar extends StatefulWidget {
 
 class _ApplicationBarState extends State<ApplicationBar> {
   bool isDark = false;
-IconData _iconLight = Icons.wb_sunny;
-IconData _iconDark = Icons.nights_stay;
+  IconData _iconLight = Icons.wb_sunny;
+  IconData _iconDark = Icons.nights_stay;
 
-ThemeData _LightTheme =
-    ThemeData(primarySwatch: primaryColorTheme, brightness: Brightness.light);
+  ThemeData _LightTheme =
+      ThemeData(primarySwatch: primaryColorTheme, brightness: Brightness.light);
 
-ThemeData _DarkTheme =
-    ThemeData(primarySwatch: primaryColorTheme, brightness: Brightness.dark);
-    
+  ThemeData _DarkTheme =
+      ThemeData(primarySwatch: primaryColorTheme, brightness: Brightness.dark);
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -44,9 +44,5 @@ ThemeData _DarkTheme =
             Navigator.of(context).pop();
           },
         ));
-
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(48);
 }
