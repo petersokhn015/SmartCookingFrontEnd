@@ -1,9 +1,14 @@
 import 'package:app/Models/DetailedRecipe.dart';
+import 'package:app/Models/Ingredient.dart';
 import 'package:app/Services/Service.dart';
 import 'package:app/Utils/Strings.dart';
+import 'package:app/Widgets/IngredientCard.dart';
+import 'package:app/Widgets/IngredientsList.dart';
+import 'package:app/Widgets/InstructionsList.dart';
 import 'package:app/Widgets/LoadingScreen.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/ApplicationBar.dart';
+import 'package:app/Widgets/TagsList.dart';
 import 'package:flutter/material.dart';
 
 class RecipeDetails extends StatefulWidget {
@@ -33,6 +38,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
             ),
             body: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(clipBehavior: Clip.none, children: [
                     //background
@@ -180,10 +186,65 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                       ),
                     ),
                   ]),
-                  // ListView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   shrinkWrap: true,
-                  // )
+                  //tags list
+                  Center(
+                    child: Padding(
+                        padding: EdgeInsets.only(top: 80),
+                        child: TagsList(tags: recipeDetails!.tags)),
+                  ),
+                  //ingredients list
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            'Ingredients',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900, fontSize: 24),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height / 4,
+                            child: IngredientsList(
+                                ingredients: recipeDetails!.ingredients),
+                          ),
+                        )
+                      ]),
+                  //Instructions
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            'Instructions',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900, fontSize: 24),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Container(
+                              width: MediaQuery.of(context).size.width - 25,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: primaryColor,
+                              ),
+                              child: InstructionsList(
+                                  steps: recipeDetails!.steps)),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        )
+                      ]),
                 ],
               ),
             ),

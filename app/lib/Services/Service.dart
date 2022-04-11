@@ -29,12 +29,30 @@ Future<List<String>> getTags() async {
 }
 
 Future<DetailedRecipe> getRecipeDetails(int id) async {
-  List<String> tags = ['Vegan', 'Gluten Free', 'American'];
+  List<String> tags = [
+    'Vegan',
+    'Gluten Free',
+    'American',
+    'Main Course',
+    "Vegetarian"
+  ];
   List<String> instructions = ['Cut Bamboo', 'Add Salt'];
   List<Ingredient> ingredients = [
-    new Ingredient(unit: 'g', amount: 3, name: 'bamboo'),
-    new Ingredient(unit: 'tbs', amount: 1, name: 'salt')
+    new Ingredient(
+        unit: 'g',
+        amount: 3,
+        name: 'bamboo',
+        imageUrl:
+            'https://cpimg.tistatic.com/04933164/b/4/Bambo-Extract-70-Silica.jpg'),
+    new Ingredient(
+        unit: 'tbs',
+        amount: 1,
+        name: 'salt',
+        imageUrl:
+            'https://jabalchannel.com/wp-content/uploads/2019/08/SALT.jpg')
   ];
+
+  List<String> steps = ['Burn oven', 'Add salt'];
 
   return await new DetailedRecipe(
       imageUrl: "https://spoonacular.com/recipeImages/715538-312x231.jpg",
@@ -45,5 +63,6 @@ Future<DetailedRecipe> getRecipeDetails(int id) async {
       calorieAmount: 12,
       ingredientCount: ingredients.length,
       servingAmount: 2,
-      instructions: instructions);
+      instructions: instructions,
+      steps: steps);
 }

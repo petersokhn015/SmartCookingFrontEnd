@@ -5,6 +5,7 @@ class DetailedRecipe {
   final int cookTime, calorieAmount, servingAmount, ingredientCount;
   final List<String> tags, instructions;
   final List<Ingredient> ingredients;
+  final List<String> steps;
 
   DetailedRecipe(
       {required this.imageUrl,
@@ -15,7 +16,8 @@ class DetailedRecipe {
       required this.ingredientCount,
       required this.tags,
       required this.ingredients,
-      required this.instructions});
+      required this.instructions,
+      required this.steps});
 
   factory DetailedRecipe.fromMap(Map<String, dynamic> json) => DetailedRecipe(
       imageUrl: json["imageUrl"],
@@ -26,7 +28,8 @@ class DetailedRecipe {
       ingredientCount: json["ingredientCount"],
       tags: json["tags"],
       ingredients: json["ingredients"],
-      instructions: json["instructions"]);
+      instructions: json["instructions"],
+      steps: json["steps"]);
 
   Map<String, dynamic> toMap() => {
         "imageUrl": imageUrl,
@@ -37,6 +40,7 @@ class DetailedRecipe {
         "ingedientCount": ingredientCount,
         "tags": tags,
         "ingredents": ingredients,
-        "instructions": instructions
+        "instructions": instructions,
+        "steps": steps
       };
 }

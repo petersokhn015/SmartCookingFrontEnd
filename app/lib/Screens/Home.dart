@@ -107,7 +107,9 @@ class _HomeState extends State<Home> {
                       Container(
                           width: MediaQuery.of(context).size.width - 20,
                           margin: EdgeInsets.all(10),
-                          child: TagsList())
+                          child: TagsList(
+                            tags: ["Vegan", "Amercian", "Gluten Free"],
+                          ))
                     ]),
                   ],
                 )
