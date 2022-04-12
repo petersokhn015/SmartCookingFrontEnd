@@ -1,3 +1,5 @@
+import 'package:app/Screens/Browse.dart';
+import 'package:app/Services/Service.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,13 @@ ThemeData _DarkTheme =
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-  final _pageOptions = [Home(), Camera(), Profile()];
+  final _pageOptions = [
+    Browse(
+      recipeList: getBrowseRecipes(),
+    ),
+    Camera(),
+    Profile()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +54,10 @@ class _MainPageState extends State<MainPage> {
                   icon: Icon(isDark ? _iconDark : _iconLight)),
             ],
             centerTitle: true,
-            title: Image(image: AssetImage(appLogoNoText),height: 80,),
+            title: Image(
+              image: AssetImage(appLogoNoText),
+              height: 80,
+            ),
           ),
           body: _pageOptions[_selectedIndex],
           bottomNavigationBar: BottomNavigationBar(
