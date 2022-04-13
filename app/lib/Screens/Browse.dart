@@ -1,5 +1,6 @@
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
+import 'package:app/Widgets/FilterOverlay.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +17,20 @@ class Browse extends StatefulWidget {
   State<Browse> createState() => _BrowseState();
 }
 
-class _BrowseState extends State<Browse> {
+class _BrowseState extends State<Browse> with TickerProviderStateMixin {
+  late OverlayState? overlayState;
+  late OverlayEntry overlayEntry;
+
   @override
   Widget build(BuildContext context) {
+    overlayState = Overlay.of(context);
+    overlayEntry = OverlayEntry(builder: (context) {
+      return FilterOverlay(
+        onSaveCallback: removeFilter,
+        onCancelCallback: removeFilter,
+      );
+    });
+
     return SafeArea(
         child: Scaffold(
             body: Column(children: [
@@ -58,7 +70,9 @@ class _BrowseState extends State<Browse> {
                 color: primaryColor,
                 size: 24,
               ),
-              onPressed: () {},
+              onPressed: () {
+                displayFilter(context);
+              },
             ),
             flex: 1,
           )
@@ -80,5 +94,11 @@ class _BrowseState extends State<Browse> {
     ])));
   }
 
-  void displayFilter(BuildContext context) {}
+  displayFilter(BuildContext context) {
+    overlayState!.insert(overlayEntry);
+  }
+
+  removeFilter() {
+    overlayEntry.remove();
+  }
 }

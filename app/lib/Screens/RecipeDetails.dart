@@ -1,13 +1,11 @@
 import 'package:app/Models/DetailedRecipe.dart';
-import 'package:app/Models/Ingredient.dart';
 import 'package:app/Services/Service.dart';
 import 'package:app/Utils/Strings.dart';
-import 'package:app/Widgets/IngredientCard.dart';
 import 'package:app/Widgets/IngredientsList.dart';
 import 'package:app/Widgets/InstructionsList.dart';
 import 'package:app/Widgets/LoadingScreen.dart';
 import 'package:app/Utils/AppColors.dart';
-import 'package:app/Widgets/ApplicationBar.dart';
+import 'package:app/Widgets/Tag.dart';
 import 'package:app/Widgets/TagsList.dart';
 import 'package:flutter/material.dart';
 
@@ -24,10 +22,15 @@ class RecipeDetails extends StatefulWidget {
 
 class _RecipeDetailsState extends State<RecipeDetails> {
   DetailedRecipe? recipeDetails;
+  List<Tag> tagsList = [];
 
   @override
   Widget build(BuildContext context) {
     getInfo();
+    if (tagsList.isEmpty)
+      setState(() {
+        tagsList = generateTags(recipeDetails!.tags);
+      });
     return recipeDetails == null
         ? LoadingScreen()
         : SafeArea(
@@ -202,8 +205,9 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                     Center(
                       child: Padding(
                           padding: EdgeInsets.only(top: 80),
-                          child: TagsList(tags: recipeDetails!.tags)),
+                          child: TagsList(tags: tagsList)),
                     ),
+
                     //ingredients list
                     SizedBox(
                       height: 15,
@@ -264,9 +268,23 @@ class _RecipeDetailsState extends State<RecipeDetails> {
           );
   }
 
-// get recipe info by id
+  // get recipe info by id
   void getInfo() {
     getRecipeDetails(widget.recipeId)
         .then((value) => {setState(() => recipeDetails = value)});
+  }
+
+  //generate tags list
+  List<Tag> generateTags(List<String> tags) {
+    List<Tag> tagsList = [];
+    for (var i = 0; i < tags.length; i++) {
+      tagsList.add(Tag(
+        text: tags[i],
+        isActive: true,
+        isPressable: true,
+        voidCallback: () {},
+      ));
+    }
+    return tagsList;
   }
 }

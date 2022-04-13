@@ -5,7 +5,7 @@ import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
-import 'Camera.dart';
+import 'Browse.dart';
 import 'Home.dart';
 import 'Profile.dart';
 
@@ -29,10 +29,10 @@ ThemeData _DarkTheme =
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final _pageOptions = [
+    Home(),
     Browse(
       recipeList: getBrowseRecipes(),
     ),
-    Camera(),
     Profile()
   ];
 

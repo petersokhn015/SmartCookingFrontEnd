@@ -4,6 +4,7 @@ import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Carousel.dart';
 import 'package:app/Widgets/RecipeCard.dart';
+import 'package:app/Widgets/Tag.dart';
 import 'package:app/Widgets/TagsList.dart';
 import 'package:flutter/material.dart';
 
@@ -111,7 +112,23 @@ class _HomeState extends State<Home> {
                           width: MediaQuery.of(context).size.width - 20,
                           margin: EdgeInsets.all(10),
                           child: TagsList(
-                            tags: ["Vegan", "Amercian", "Gluten Free"],
+                            tags: [
+                              Tag(
+                                text: "Vegan",
+                                isActive: true,
+                                isPressable: false,
+                              ),
+                              Tag(
+                                text: "American",
+                                isActive: true,
+                                isPressable: false,
+                              ),
+                              Tag(
+                                text: "Gluten Free",
+                                isActive: true,
+                                isPressable: false,
+                              )
+                            ],
                           ))
                     ]),
                   ],

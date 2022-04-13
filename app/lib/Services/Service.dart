@@ -105,7 +105,13 @@ List<Recipe> getBrowseRecipes() {
 }
 
 Future<List<String>> getTags() async {
-  List<String> tags = ['Vegan', 'American', 'Main Course'];
+  List<String> tags = [
+    'Vegan',
+    'American',
+    'Main Course',
+    'Dinner',
+    'Vegetarian'
+  ];
   return await tags;
 }
 
