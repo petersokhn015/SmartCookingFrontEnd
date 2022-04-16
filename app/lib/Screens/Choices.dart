@@ -2,6 +2,7 @@ import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/Login.dart';
 import 'package:app/Screens/MainPage.dart';
 import 'package:app/Screens/SignUp.dart';
+import 'package:app/Services/LoginService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Button.dart';
@@ -15,6 +16,7 @@ class Choices extends StatefulWidget {
 }
 
 class _ChoicesState extends State<Choices> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,7 +39,7 @@ class _ChoicesState extends State<Choices> {
             ),
             Button(
                 text: "Login",
-                onClicked: () {
+                onClicked: () async {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Login()));
                 }),
@@ -56,8 +58,8 @@ class _ChoicesState extends State<Choices> {
             Button(
                 text: "Skip",
                 onClicked: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => MainPage()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => MainPage()));
                 })
           ]),
         ),

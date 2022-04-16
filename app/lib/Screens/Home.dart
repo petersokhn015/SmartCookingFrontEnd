@@ -6,6 +6,8 @@ import 'package:app/Widgets/Carousel.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:app/Widgets/TagsList.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,6 +17,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String username = '';
+  SharedPreferences? prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initializePreference().whenComplete(() {
+      setState(() {});
+    });
+  }
+
+  Future<void> initializePreference() async {
+    prefs = await SharedPreferences.getInstance();
+    username = await prefs!.getString(prefs_Username)!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +66,7 @@ class _HomeState extends State<Home> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("Welcome Back \n joteif",
+                                child: Text("Welcome Back \n"+username,
                                     style: TextStyle(
                                       color: secondaryColor,
                                       fontSize: 22,

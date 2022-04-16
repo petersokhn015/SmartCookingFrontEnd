@@ -1,6 +1,8 @@
 import 'package:app/Screens/Login.dart';
+import 'package:app/Services/SignUpService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class _SignUpState extends State<SignUp> {
   bool _isObscurePassword = true;
   bool _isObscureCPassword = true;
   bool _isVisible = false;
+  SignUpService _signUpService = SignUpService();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,7 @@ class _SignUpState extends State<SignUp> {
                 Container(
                   width: 530,
                   decoration: BoxDecoration(
-                    border: Border.all(color: primaryColor),
+                      border: Border.all(color: primaryColor),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: secondaryColor),
                   margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
@@ -159,7 +162,38 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              onTap: () {},
+                              onTap: () async {
+                                var isSignedUp =
+                                    await _signUpService.SignUp(
+                                        usernameController.text,
+                                        passwordController.text);
+
+                                if (isSignedUp == true) {
+                                  
+                                  Fluttertoast.showToast(
+                                      msg: "Signed Up Successfully",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: tertiaryColor,
+                                      textColor: secondaryColor,
+                                      fontSize: 16.0);
+
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: "SignUp Failed",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: tertiaryColor,
+                                      textColor: secondaryColor,
+                                      fontSize: 16.0);
+                                }
+                              },
                               child: const Center(
                                 child: Text(
                                   "Next",
