@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  final double width, height;
+  final double? width;
+  final double? height;
 
-  RecipeCard({required this.recipe, required this.width, required this.height});
+  RecipeCard({required this.recipe, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {

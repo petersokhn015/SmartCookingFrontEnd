@@ -1,15 +1,18 @@
-import 'package:app/Utils/AppColors.dart';
 import 'package:flutter/material.dart';
+
+import 'package:app/Utils/AppColors.dart';
 
 class Tag extends StatefulWidget {
   final String text;
-  final bool isActive;
+  late bool isActive;
+  final bool isPressable;
   final VoidCallback? voidCallback;
 
-  const Tag({
+  Tag({
     Key? key,
     required this.text,
     required this.isActive,
+    required this.isPressable,
     this.voidCallback,
   }) : super(key: key);
 
@@ -26,26 +29,25 @@ class _TagState extends State<Tag> {
       mainColor = primaryColor;
       textColor = secondaryColor;
     } else {
-      textColor = primaryColor;
-      mainColor = secondaryColor;
+      textColor = changeTextColor(context);
+      mainColor = changeBackgroundColor(context);
     }
 
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 35, maxWidth: 120),
+      constraints: BoxConstraints(maxHeight: 35, maxWidth: 100),
       child: TextButton(
-        style: TextButton.styleFrom(
-            backgroundColor: mainColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            side: BorderSide(color: primaryColor)),
-        child: Center(
-          child: Text(
-            widget.text,
-            style: TextStyle(fontSize: 14, color: textColor),
+          style: TextButton.styleFrom(
+              backgroundColor: mainColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              side: BorderSide(color: primaryColor)),
+          child: Center(
+            child: Text(
+              widget.text,
+              style: TextStyle(fontSize: 14, color: textColor),
+            ),
           ),
-        ),
-        onPressed: widget.voidCallback,
-      ),
+          onPressed: widget.voidCallback),
     );
   }
 }
