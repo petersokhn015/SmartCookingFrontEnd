@@ -27,7 +27,7 @@ class _DropdownContentTileState extends State<DropdownContentTile> {
                     child: CheckboxListTile(
                       title: Text(
                         value,
-                        style: TextStyle(color: primaryColor),
+                        style: TextStyle(color: changeTextColor(context)),
                       ),
                       value: false,
                       onChanged: (newValue) {

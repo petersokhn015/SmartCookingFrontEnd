@@ -27,19 +27,17 @@ class _DropdownContentState extends State<DropdownContent> {
       },
       children: widget.items.map((DropDownItem item) {
         return ExpansionPanel(
-            backgroundColor: secondaryColor,
+            backgroundColor: changeBackgroundColor(context),
             headerBuilder: (context, isExpanded) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    item.header,
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        color: primaryColor),
-                  ),
+                  Text(item.header,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          color: changeTextColor(context))),
                 ],
               );
             },

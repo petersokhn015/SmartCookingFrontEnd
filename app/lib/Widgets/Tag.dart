@@ -29,8 +29,8 @@ class _TagState extends State<Tag> {
       mainColor = primaryColor;
       textColor = secondaryColor;
     } else {
-      textColor = primaryColor;
-      mainColor = secondaryColor;
+      textColor = changeTextColor(context);
+      mainColor = changeBackgroundColor(context);
     }
 
     return ConstrainedBox(

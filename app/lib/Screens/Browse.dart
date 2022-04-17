@@ -3,7 +3,6 @@ import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/FilterOverlay.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:flutter/material.dart';
-
 import 'package:app/Models/Recipe.dart';
 
 class Browse extends StatefulWidget {
@@ -23,14 +22,6 @@ class _BrowseState extends State<Browse> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    overlayState = Overlay.of(context);
-    overlayEntry = OverlayEntry(builder: (context) {
-      return FilterOverlay(
-        onSaveCallback: removeFilter,
-        onCancelCallback: removeFilter,
-      );
-    });
-
     return SafeArea(
         child: Scaffold(
             body: Column(children: [
@@ -47,10 +38,8 @@ class _BrowseState extends State<Browse> with TickerProviderStateMixin {
                   prefixIcon: Icon(Icons.search),
                   hintText: 'Search...',
                   filled: true,
-                  fillColor: (Theme.of(context).brightness == Brightness.dark
-                      ? Color(0xFF4F4F4F)
-                      : Color(0xFFF7F7F7)),
-                  contentPadding: EdgeInsets.all(10.0),
+                  fillColor: changeBackgroundColor(context),
+                  contentPadding: EdgeInsets.fromLTRB(15.0, 0, 0, 0),
                   border: OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
                       const Radius.circular(25.0),
@@ -67,7 +56,7 @@ class _BrowseState extends State<Browse> with TickerProviderStateMixin {
             child: IconButton(
               icon: ImageIcon(
                 AssetImage(filterIcon),
-                color: primaryColor,
+                color: changeTextColor(context),
                 size: 24,
               ),
               onPressed: () {
@@ -95,7 +84,15 @@ class _BrowseState extends State<Browse> with TickerProviderStateMixin {
   }
 
   displayFilter(BuildContext context) {
-    overlayState!.insert(overlayEntry);
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext bc) {
+          return SizedBox(
+              height: MediaQuery.of(context).size.height - 175,
+              child: FilterOverlay(
+                  onSaveCallback: () {}, onCancelCallback: () {}));
+        });
   }
 
   removeFilter() {

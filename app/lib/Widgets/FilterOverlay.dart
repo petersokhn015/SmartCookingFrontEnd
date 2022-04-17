@@ -2,7 +2,6 @@ import 'package:app/Services/Service.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/DropdownContent.dart';
 import 'package:app/Widgets/DropdownContentTile.dart';
-import 'package:app/Widgets/FilterDivider.dart';
 import 'package:app/Widgets/Tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,123 +68,119 @@ class _FilterOverlayState extends State<FilterOverlay> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black.withOpacity(0.75),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                color: secondaryColor,
-                width: MediaQuery.of(context).size.width - 30,
-                height: MediaQuery.of(context).size.height - 150,
-                child: Column(
-                  children: [
-                    Container(
-                      color: primaryColor,
-                      width: MediaQuery.of(context).size.width - 30,
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Filters',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    color: secondaryColor),
-                              )
-                            ]),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              color: changeBackgroundColor(context),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 175,
+              child: Column(
+                children: [
+                  Container(
+                    color: primaryColor,
+                    width: MediaQuery.of(context).size.width,
+                    height: 60,
+                    child: Center(
+                      child: Text(
+                        'Filters',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: secondaryColor),
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Tag(
+                        text: 'Cancel',
+                        isActive: false,
+                        isPressable: true,
+                        voidCallback: widget.onCancelCallback,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Tag(
+                        text: 'Save',
+                        isActive: true,
+                        isPressable: true,
+                        voidCallback: widget.onSaveCallback,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                    child: Row(
                       children: [
-                        Tag(
-                          text: 'Cancel',
-                          isActive: false,
-                          isPressable: true,
-                          voidCallback: widget.onCancelCallback,
+                        Expanded(
+                          child: Text(
+                            'Max Cook Time: ',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                color: changeTextColor(context)),
+                          ),
+                          flex: 3,
                         ),
-                        SizedBox(
-                          width: 5,
+                        Expanded(
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
+                            ],
+                          ),
+                          flex: 1,
                         ),
-                        Tag(
-                          text: 'Save',
-                          isActive: true,
-                          isPressable: true,
-                          voidCallback: widget.onSaveCallback,
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
+                        Expanded(
+                          child: Text(
+                            'min',
+                            style: TextStyle(color: changeTextColor(context)),
+                          ),
+                          flex: 1,
+                        )
                       ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Max Cook Time: ',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                  color: primaryColor),
-                            ),
-                            flex: 3,
-                          ),
-                          Expanded(
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]')),
-                              ],
-                            ),
-                            flex: 1,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'min',
-                              style: TextStyle(color: primaryColor),
-                            ),
-                            flex: 1,
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    FilterDivider(),
-                    Expanded(
-                      child: SingleChildScrollView(
-                          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                          child: Column(
-                            children: [
-                              DropdownContent(items: dietItems),
-                              DropdownContent(items: intoleranceItems),
-                              DropdownContent(items: mealTypeItems),
-                              DropdownContent(items: cuisineTypeItems),
-                              SizedBox(
-                                height: 10,
-                              )
-                            ],
-                          )),
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    color: primaryColor,
+                    height: 2,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                        child: Column(
+                          children: [
+                            DropdownContent(items: dietItems),
+                            DropdownContent(items: intoleranceItems),
+                            DropdownContent(items: mealTypeItems),
+                            DropdownContent(items: cuisineTypeItems),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        )),
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
