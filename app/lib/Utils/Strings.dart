@@ -21,7 +21,7 @@ const lbl_My_Account = "My Account";
 const lbl_My_Preferences = "My Preferences";
 const lbl_My_Favorites = "My Favorites";
 
-const caloriesIcon = "assets/CaloriesIcon.svg";
+const caloriesIcon = "assets/CaloriesIcon.png";
 const cookTimeIcon = "assets/CookTimeIcon.png";
 const servingsIcon = "assets/ServingsIcon.png";
 const filterIcon = "assets/FilterIcon.png";

@@ -1,5 +1,6 @@
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
+import 'package:app/Widgets/BackToTop.dart';
 import 'package:app/Widgets/FilterOverlay.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:flutter/material.dart';
@@ -71,14 +72,18 @@ class _BrowseState extends State<Browse> with TickerProviderStateMixin {
         height: 15,
       ),
       Expanded(
-        child: GridView.builder(
-            shrinkWrap: true,
-            itemCount: widget.recipeList.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 2.0, mainAxisSpacing: 2.0),
-            itemBuilder: (BuildContext context, int index) {
-              return RecipeCard(recipe: widget.recipeList[index]);
-            }),
+        child: BackToTop(
+          widget: GridView.builder(
+              shrinkWrap: true,
+              itemCount: widget.recipeList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 2.0,
+                  mainAxisSpacing: 2.0),
+              itemBuilder: (BuildContext context, int index) {
+                return RecipeCard(recipe: widget.recipeList[index]);
+              }),
+        ),
       ),
     ])));
   }
