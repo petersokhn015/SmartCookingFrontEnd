@@ -3,7 +3,7 @@ import 'package:app/Models/Ingredient.dart';
 class DetailedRecipe {
   final String imageUrl, name;
   final int cookTime, calorieAmount, servingAmount, ingredientCount;
-  final List<String> tags, instructions;
+  final List<String> tags;
   final List<Ingredient> ingredients;
   final List<String> steps;
 
@@ -16,7 +16,6 @@ class DetailedRecipe {
       required this.ingredientCount,
       required this.tags,
       required this.ingredients,
-      required this.instructions,
       required this.steps});
 
   factory DetailedRecipe.fromMap(Map<String, dynamic> json) => DetailedRecipe(
@@ -28,7 +27,6 @@ class DetailedRecipe {
       ingredientCount: json["ingredientCount"],
       tags: json["tags"],
       ingredients: json["ingredients"],
-      instructions: json["instructions"],
       steps: json["steps"]);
 
   Map<String, dynamic> toMap() => {
@@ -40,7 +38,6 @@ class DetailedRecipe {
         "ingedientCount": ingredientCount,
         "tags": tags,
         "ingredents": ingredients,
-        "instructions": instructions,
         "steps": steps
       };
 }
