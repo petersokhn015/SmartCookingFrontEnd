@@ -7,24 +7,93 @@ Future<List<Recipe>> getRecipes() async {
     Recipe(
         id: 1,
         name: 'Bamboo Salad',
-        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg',
-        ingredientCount: 3),
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
     Recipe(
         id: 2,
         name: 'Bamboo Salad',
-        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg',
-        ingredientCount: 1),
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
     Recipe(
         id: 4,
         name: 'Bamboo Salad',
-        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg',
-        ingredientCount: 4)
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg')
   ];
   return await recipes;
 }
 
+List<Recipe> getBrowseRecipes() {
+  List<Recipe> recipes = [
+    Recipe(
+        id: 1,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 2,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 4,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 1,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 2,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 4,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 1,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 2,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 4,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 1,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 2,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 4,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 1,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 2,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+    Recipe(
+        id: 4,
+        name: 'Bamboo Salad',
+        imageURL: 'https://spoonacular.com/recipeImages/715538-312x231.jpg'),
+  ];
+  return recipes;
+}
+
 Future<List<String>> getTags() async {
-  List<String> tags = ['Vegan', 'American', 'Main Course'];
+  List<String> tags = [
+    'Vegan',
+    'American',
+    'Main Course',
+    'Dinner',
+    'Vegetarian'
+  ];
   return await tags;
 }
 
@@ -63,6 +132,5 @@ Future<DetailedRecipe> getRecipeDetails(int id) async {
       calorieAmount: 12,
       ingredientCount: ingredients.length,
       servingAmount: 2,
-      instructions: instructions,
       steps: steps);
 }

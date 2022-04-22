@@ -5,36 +5,51 @@ import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  final double width, height;
+  final double? width;
+  final double? height;
 
-  RecipeCard({required this.recipe, required this.width, required this.height});
+  RecipeCard({required this.recipe, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() => changPages(recipe.id, context)),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.25),
-              BlendMode.multiply,
-            ),
-            image: NetworkImage(recipe.imageURL),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
+      child: Stack(children: [
+        ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            child: ShaderMask(
+              shaderCallback: (bounds) {
+                return LinearGradient(
+                        colors: [Colors.transparent, tertiaryColor],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)
+                    .createShader(bounds);
+              },
+              blendMode: BlendMode.srcATop,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
+                width: width,
+                height: height,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: LinearGradient(
+                      colors: [secondaryColor, tertiaryColor],
+                      stops: [0, 1],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter),
+                  image: DecorationImage(
+                    image: NetworkImage(recipe.imageURL),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            )),
+        Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Align(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0),
+                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -44,20 +59,10 @@ class RecipeCard extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           recipe.name,
-                          style: TextStyle(fontSize: 14, color: secondaryColor),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          recipe.ingredientCount == 1
-                              ? recipe.ingredientCount.toString() +
-                                  ' ingredient'
-                              : recipe.ingredientCount.toString() +
-                                  ' ingredients',
-                          style: TextStyle(fontSize: 14, color: secondaryColor),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: secondaryColor,
+                              fontWeight: FontWeight.w500),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -70,7 +75,7 @@ class RecipeCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ]),
     );
   }
 

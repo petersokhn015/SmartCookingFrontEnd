@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 const font_Pacifico = "Pacifico";
 const primaryColor = Color(0XFFDA1744);
 
@@ -45,3 +44,15 @@ MaterialColor tertiaryColorTheme = MaterialColor(0xFF000000, <int, Color>{
   800: const Color(0xFF000000),
   900: const Color(0xFF000000),
 });
+
+Color changeBackgroundColor(BuildContext context) {
+  return (Theme.of(context).brightness == Brightness.dark
+      ? Color(0xFF4F4F4F)
+      : Color(0xFFF7F7F7));
+}
+
+Color changeTextColor(BuildContext context) {
+  return (Theme.of(context).brightness == Brightness.dark
+      ? secondaryColor
+      : primaryColor);
+}
