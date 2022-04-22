@@ -6,6 +6,7 @@ import 'package:app/Widgets/AccesButton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -15,6 +16,23 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+  String username = '';
+  SharedPreferences? prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initializePreference().whenComplete(() {
+      setState(() {});
+    });
+  }
+
+  Future<void> initializePreference() async {
+    prefs = await SharedPreferences.getInstance();
+    username = await prefs!.getString(prefs_Username)!;
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -73,7 +91,7 @@ class _ProfileState extends State<Profile> {
                     height: 20,
                   ),
                   Text(
-                    "Joteif",
+                    username,
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(

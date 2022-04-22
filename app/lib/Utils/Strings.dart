@@ -3,6 +3,12 @@ const appLogoNoText = "assets/CookingPandaNoText.png";
 const chefPandaLogo = "assets/PandaChef.png";
 const homePageTopShape = "assets/HomePageTop.png";
 const profileBackgroundPicture = "assets/foodBackground.jpg";
+const caloriesIcon = "assets/CaloriesIcon.png";
+const cookTimeIcon = "assets/CookTimeIcon.png";
+const servingsIcon = "assets/ServingsIcon.png";
+const filterIcon = "assets/FilterIcon.png";
+
+const prefs_Username = "Username";
 
 const lbl_Home = "Home";
 const lbl_Profile = "Profile";
@@ -21,7 +27,3 @@ const lbl_My_Account = "My Account";
 const lbl_My_Preferences = "My Preferences";
 const lbl_My_Favorites = "My Favorites";
 
-const caloriesIcon = "assets/CaloriesIcon.png";
-const cookTimeIcon = "assets/CookTimeIcon.png";
-const servingsIcon = "assets/ServingsIcon.png";
-const filterIcon = "assets/FilterIcon.png";

@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:app/Screens/SplashScreen.dart';
+import 'package:app/Services/MyHttpOverrides.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+    HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
