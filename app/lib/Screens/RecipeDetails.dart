@@ -103,7 +103,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                 //name
                                 children: [
                                   Text(
-                                    recipeDetails!.name,
+                                    recipeDetails!.title,
                                     style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w900),
