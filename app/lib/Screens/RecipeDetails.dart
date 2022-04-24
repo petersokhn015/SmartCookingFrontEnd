@@ -1,5 +1,5 @@
 import 'package:app/Models/DetailedRecipe.dart';
-import 'package:app/Services/Service.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/BackToTop.dart';
 import 'package:app/Widgets/IngredientsList.dart';
@@ -63,7 +63,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                     bottomLeft: Radius.circular(30),
                                     bottomRight: Radius.circular(30)),
                                 image: DecorationImage(
-                                  image: NetworkImage(recipeDetails!.imageUrl),
+                                  image: NetworkImage(recipeDetails!.image),
                                   fit: BoxFit.cover,
                                 )),
                           ),
@@ -159,7 +159,8 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                                     .middle),
                                             TextSpan(
                                                 text: " " +
-                                                    recipeDetails!.calorieAmount
+                                                    recipeDetails!
+                                                        .caloriesAmount
                                                         .toString() +
                                                     ' kcal')
                                           ]),
@@ -179,17 +180,13 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                                 alignment: PlaceholderAlignment
                                                     .middle),
                                             TextSpan(
-                                              text: recipeDetails!
-                                                          .servingAmount ==
-                                                      1
+                                              text: recipeDetails!.servings == 1
                                                   ? " " +
-                                                      recipeDetails!
-                                                          .servingAmount
+                                                      recipeDetails!.servings
                                                           .toString() +
                                                       ' serving'
                                                   : " " +
-                                                      recipeDetails!
-                                                          .servingAmount
+                                                      recipeDetails!.servings
                                                           .toString() +
                                                       ' servings',
                                             )
@@ -276,8 +273,8 @@ class _RecipeDetailsState extends State<RecipeDetails> {
 
   // get recipe info by id
   void getInfo() {
-    getRecipeDetails(widget.recipeId)
-        .then((value) => {setState(() => recipeDetails = value)});
+    // getRecipeDetails(widget.recipeId)
+    //     .then((value) => {setState(() => recipeDetails = value)});
   }
 
   //generate tags list

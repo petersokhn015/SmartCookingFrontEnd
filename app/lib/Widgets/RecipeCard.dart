@@ -38,7 +38,7 @@ class RecipeCard extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter),
                   image: DecorationImage(
-                    image: NetworkImage(recipe.imageURL),
+                    image: NetworkImage(recipe.image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -58,7 +58,7 @@ class RecipeCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          recipe.name,
+                          recipe.title,
                           style: TextStyle(
                               fontSize: 16,
                               color: secondaryColor,

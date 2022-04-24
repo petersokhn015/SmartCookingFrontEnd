@@ -1,4 +1,4 @@
-import 'package:app/Services/Service.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/DropdownContent.dart';
 import 'package:app/Widgets/DropdownContentTile.dart';
@@ -62,8 +62,8 @@ class _FilterOverlayState extends State<FilterOverlay> {
   Widget build(BuildContext context) {
     if (tagsList.isEmpty)
       setState(() {
-        getTags()
-            .then((value) => setState(() => tagsList = generateTags(value)));
+        // getTags()
+        //     .then((value) => setState(() => tagsList = generateTags(value)));
       });
     return SafeArea(
       child: Scaffold(

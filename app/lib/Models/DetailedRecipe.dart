@@ -2,19 +2,19 @@ import 'package:app/Models/Ingredient.dart';
 
 class DetailedRecipe {
   final int id;
-  final String imageUrl, title;
-  final int cookTime, calorieAmount, servingAmount, ingredientCount;
+  final String image, title;
+  final int cookTime, caloriesAmount, servings, ingredientCount;
   final List<String> tags;
   final List<Ingredient> ingredients;
   final List<String> steps;
 
   DetailedRecipe(
       {required this.id,
-      required this.imageUrl,
+      required this.image,
       required this.title,
       required this.cookTime,
-      required this.calorieAmount,
-      required this.servingAmount,
+      required this.caloriesAmount,
+      required this.servings,
       required this.ingredientCount,
       required this.tags,
       required this.ingredients,
@@ -22,11 +22,11 @@ class DetailedRecipe {
 
   factory DetailedRecipe.fromMap(Map<String, dynamic> json) => DetailedRecipe(
       id: json["id"],
-      imageUrl: json["imageUrl"],
+      image: json["image"],
       title: json["title"],
       cookTime: json["cookTime"],
-      calorieAmount: json["calorieAmount"],
-      servingAmount: json["servingAmount"],
+      caloriesAmount: json["caloriesAmount"],
+      servings: json["servings"],
       ingredientCount: json["ingredientCount"],
       tags: json["tags"],
       ingredients: json["ingredients"],
@@ -34,11 +34,11 @@ class DetailedRecipe {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "imageUrl": imageUrl,
+        "image": image,
         "title": title,
         "cookTime": cookTime,
-        "calorieAmount": calorieAmount,
-        "servingAmount": servingAmount,
+        "caloriesAmount": caloriesAmount,
+        "servings": servings,
         "ingedientCount": ingredientCount,
         "tags": tags,
         "ingredents": ingredients,

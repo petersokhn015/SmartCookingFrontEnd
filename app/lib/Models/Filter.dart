@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Filter {
   Filter({
     required this.query,

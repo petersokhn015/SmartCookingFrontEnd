@@ -1,9 +1,9 @@
 import 'package:app/Models/Recipe.dart';
-import 'package:app/Services/Service.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../Services/RecipeService.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({Key? key}) : super(key: key);
@@ -14,13 +14,14 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   int currentSlide = 0;
+  RecipeServices recipeServices = RecipeServices();
   final CarouselController controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         FutureBuilder<List<Recipe>>(
-            future: getRecipes(),
+            future: recipeServices.getRandomRecipes(3),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
