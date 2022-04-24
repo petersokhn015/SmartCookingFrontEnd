@@ -45,6 +45,7 @@ dependencies:
   fluttertoast: ^8.0.9
   modal_bottom_sheet: ^2.0.1
   flutter_scroll_to_top: ^2.1.1
+  shimmer: ^2.0.0
 
 
 dev_dependencies:

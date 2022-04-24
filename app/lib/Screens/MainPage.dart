@@ -1,5 +1,6 @@
 import 'package:app/Screens/Browse.dart';
-import 'package:app/Services/Service.dart';
+import 'package:app/Screens/Camera.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
@@ -28,13 +29,7 @@ ThemeData _DarkTheme =
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-  final _pageOptions = [
-    Home(),
-    Browse(
-      recipeList: getBrowseRecipes(),
-    ),
-    Profile()
-  ];
+  final _pageOptions = [Home(), Camera(), Profile()];
 
   @override
   Widget build(BuildContext context) {
