@@ -1,3 +1,4 @@
+import 'package:app/Screens/Camera.dart';
 import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/Login.dart';
 import 'package:app/Screens/MainPage.dart';
@@ -7,6 +8,7 @@ import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Button.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Choices extends StatefulWidget {
   const Choices({Key? key}) : super(key: key);
@@ -16,6 +18,21 @@ class Choices extends StatefulWidget {
 }
 
 class _ChoicesState extends State<Choices> {
+  SharedPreferences? prefs;
+  bool isLoggedIn = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initializePreference().whenComplete(() {
+      setState(() {});
+    });
+  }
+
+  Future<void> initializePreference() async {
+    prefs = await SharedPreferences.getInstance();
+    isLoggedIn = await prefs!.setBool(prefs_isLoggedIn, false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +55,28 @@ class _ChoicesState extends State<Choices> {
               height: 30,
             ),
             Button(
-                text: "Login",
+                text: lbl_Login,
                 onClicked: () async {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Login()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Login()));
                 }),
             SizedBox(
               height: 30,
             ),
             Button(
-                text: "Sign Up",
+                text: lbl_SignUp,
                 onClicked: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => SignUp()));
                 }),
             SizedBox(
               height: 30,
             ),
             Button(
-                text: "Skip",
+                text: lbl_Skip,
                 onClicked: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => MainPage()));
                 })
           ]),
         ),

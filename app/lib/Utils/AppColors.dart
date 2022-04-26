@@ -47,7 +47,7 @@ MaterialColor tertiaryColorTheme = MaterialColor(0xFF000000, <int, Color>{
 
 Color changeBackgroundColor(BuildContext context) {
   return (Theme.of(context).brightness == Brightness.dark
-      ? Color(0xFF4F4F4F)
+      ? Color(0xFF303030)
       : Color(0xFFF7F7F7));
 }
 

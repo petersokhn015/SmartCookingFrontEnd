@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:app/Models/Recipe.dart';
 
 class Browse extends StatefulWidget {
-  late List<Recipe> recipeList;
+  late List<String> ingredientList;
   Browse({
     Key? key,
-    required this.recipeList,
+    required this.ingredientList,
   }) : super(key: key);
 
   @override
@@ -75,13 +75,13 @@ class _BrowseState extends State<Browse> with TickerProviderStateMixin {
         child: BackToTop(
           widget: GridView.builder(
               shrinkWrap: true,
-              itemCount: widget.recipeList.length,
+              itemCount: widget.ingredientList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 2.0,
                   mainAxisSpacing: 2.0),
               itemBuilder: (BuildContext context, int index) {
-                return RecipeCard(recipe: widget.recipeList[index]);
+                return Text("Haidar noob");
               }),
         ),
       ),
