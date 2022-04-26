@@ -365,7 +365,7 @@ packages:
       name: image_picker_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.4+11"
+    version: "0.8.5"
   image_picker_platform_interface:
     dependency: transitive
     description:
@@ -618,13 +618,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  show_more_text_popup:
-    dependency: "direct main"
-    description:
-      name: show_more_text_popup
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   shimmer:
     dependency: "direct main"
     description:
@@ -632,6 +625,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  show_more_text_popup:
+    dependency: "direct main"
+    description:
+      name: show_more_text_popup
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -1,5 +1,6 @@
 import 'package:app/Models/Recipe.dart';
 import 'package:app/Services/RecipeService.dart';
+import 'package:app/Services/Service.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Carousel.dart';
@@ -20,7 +21,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String username = '';
   SharedPreferences? prefs;
-  RecipeServices recipeServices = RecipeServices();
   final int randomRecipeCount = 3;
   late Future<List<Recipe>> recipes;
 
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    recipes = recipeServices.getRandomRecipes(randomRecipeCount);
+    recipes = getRecipes();
     initializePreference().whenComplete(() {
       setState(() {});
     });

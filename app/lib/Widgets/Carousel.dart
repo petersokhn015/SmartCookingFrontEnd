@@ -1,4 +1,5 @@
 import 'package:app/Models/Recipe.dart';
+import 'package:app/Services/Service.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/LoadingCard.dart';
 import 'package:app/Widgets/RecipeCard.dart';
@@ -16,14 +17,13 @@ class Carousel extends StatefulWidget {
 class _CarouselState extends State<Carousel> {
   int currentSlide = 0;
   final int recipeCount = 3;
-  RecipeServices recipeServices = RecipeServices();
   final CarouselController controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         FutureBuilder<List<Recipe>>(
-            future: recipeServices.getRandomRecipes(recipeCount),
+            future: getRecipes(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
