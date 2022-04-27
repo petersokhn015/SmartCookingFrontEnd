@@ -21,17 +21,23 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String username = '';
   SharedPreferences? prefs;
-  final int randomRecipeCount = 3;
+  RecipeServices recipeServices = RecipeServices();
+  final int randomRecipeCount = 5;
+
   late Future<List<Recipe>> recipes;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    recipes = getRecipes();
+    recipes = getAllRecipes();
     initializePreference().whenComplete(() {
       setState(() {});
     });
+  }
+
+  Future<List<Recipe>> getAllRecipes() async {
+    return await recipeServices.getRandomRecipes(randomRecipeCount);
   }
 
   Future<void> initializePreference() async {
@@ -164,22 +170,12 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 8,
                       child: Text(
                         'What you might currently want',
                         style: TextStyle(
                             fontWeight: FontWeight.w900, fontSize: 22),
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Browse',
-                            style: TextStyle(color: primaryColor, fontSize: 15),
-                          )),
-                    )
                   ],
                 ),
               ),

@@ -44,6 +44,7 @@ class _TagState extends State<Tag> {
           child: Center(
             child: Text(
               widget.text,
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: textColor),
             ),
           ),
