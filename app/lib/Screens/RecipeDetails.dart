@@ -41,19 +41,18 @@ class _RecipeDetailsState extends State<RecipeDetails> {
       }
     }
 
-    return isLoading
-        ? LoadingScreen()
-        : SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: primaryColor,
-                centerTitle: true,
-                title: Text("Recipe Details"),
-              ),
-              body: BackToTop(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          centerTitle: true,
+          title: Text("Recipe Details"),
+        ),
+        body: isLoading
+            ? LoadingScreen()
+            : BackToTop(
                 widget: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(clipBehavior: Clip.none, children: [
                         //background
@@ -80,7 +79,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                         //recipe details box
                         Positioned(
                           left: 25,
-                          top: MediaQuery.of(context).size.height / 2.3,
+                          top: MediaQuery.of(context).size.height / 2.4,
                           child: Container(
                             width: MediaQuery.of(context).size.width - 50,
                             decoration: BoxDecoration(
@@ -114,7 +113,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                     recipeDetails!.title,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        fontSize: 24,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.w900),
                                   ),
                                   SizedBox(height: 15),
@@ -276,8 +275,8 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                   ),
                 ),
               ),
-            ),
-          );
+      ),
+    );
   }
 
   // get recipe info by id

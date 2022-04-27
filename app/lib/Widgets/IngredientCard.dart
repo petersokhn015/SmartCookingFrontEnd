@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class IngredientCard extends StatelessWidget {
   final String imageUrl, name, unit;
-  final int amount;
+  final double amount;
   const IngredientCard({
     Key? key,
     required this.imageUrl,
@@ -30,7 +30,7 @@ class IngredientCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
                   image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               )),
           Padding(

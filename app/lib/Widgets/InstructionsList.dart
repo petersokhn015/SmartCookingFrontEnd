@@ -14,10 +14,10 @@ class InstructionsList extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: 600),
       child: ListView.builder(
         shrinkWrap: true,
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         itemCount: steps.length,
         itemBuilder: (BuildContext context, int index) {
-          return (ListTile(
+          return ListTile(
             title: Text(
               "Step: " + index.toString(),
               style: TextStyle(
@@ -30,7 +30,7 @@ class InstructionsList extends StatelessWidget {
               "  " + steps[index],
               style: TextStyle(fontSize: 18, color: secondaryColor),
             ),
-          ));
+          );
         },
       ),
     );
