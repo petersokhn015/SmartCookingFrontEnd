@@ -1,46 +1,56 @@
+import 'dart:convert';
+
 import 'package:app/Models/Ingredient.dart';
 
 class DetailedRecipe {
-  final String imageUrl, name;
-  final int cookTime, calorieAmount, servingAmount, ingredientCount;
-  final List<String> tags, instructions;
+  final int id;
+  final String image, title;
+  final int cookTime, caloriesAmount, servings, ingredientCount;
+  final List<String> tags;
   final List<Ingredient> ingredients;
   final List<String> steps;
 
   DetailedRecipe(
-      {required this.imageUrl,
-      required this.name,
+      {required this.id,
+      required this.image,
+      required this.title,
       required this.cookTime,
-      required this.calorieAmount,
-      required this.servingAmount,
+      required this.caloriesAmount,
+      required this.servings,
       required this.ingredientCount,
       required this.tags,
       required this.ingredients,
-      required this.instructions,
       required this.steps});
 
   factory DetailedRecipe.fromMap(Map<String, dynamic> json) => DetailedRecipe(
-      imageUrl: json["imageUrl"],
-      name: json["name"],
+      id: json["id"],
+      image: json["image"],
+      title: json["title"],
       cookTime: json["cookTime"],
-      calorieAmount: json["calorieAmount"],
-      servingAmount: json["servingAmount"],
+      caloriesAmount: json["caloriesAmount"],
+      servings: json["servings"],
       ingredientCount: json["ingredientCount"],
-      tags: json["tags"],
-      ingredients: json["ingredients"],
-      instructions: json["instructions"],
-      steps: json["steps"]);
+      tags: List<String>.from(json["tags"]),
+      ingredients: json["ingredients"]
+          .map<Ingredient>((e) => Ingredient.fromMap(e))
+          .toList(),
+      steps: List<String>.from(json["steps"]));
 
   Map<String, dynamic> toMap() => {
-        "imageUrl": imageUrl,
-        "name": name,
+        "id": id,
+        "image": image,
+        "title": title,
         "cookTime": cookTime,
-        "calorieAmount": calorieAmount,
-        "servingAmount": servingAmount,
+        "caloriesAmount": caloriesAmount,
+        "servings": servings,
         "ingedientCount": ingredientCount,
         "tags": tags,
         "ingredents": ingredients,
-        "instructions": instructions,
         "steps": steps
       };
+
+  DetailedRecipe detailedRecipeFromJson(String str) =>
+      DetailedRecipe.fromMap(json.decode(str));
+
+  String detailedRecipeToJson(DetailedRecipe data) => json.encode(data.toMap());
 }

@@ -1,11 +1,14 @@
 import 'package:app/Models/Recipe.dart';
-import 'package:app/Services/Service.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Carousel.dart';
+import 'package:app/Widgets/LoadingCard.dart';
 import 'package:app/Widgets/RecipeCard.dart';
+import 'package:app/Widgets/Tag.dart';
 import 'package:app/Widgets/TagsList.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,6 +18,31 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String username = '';
+  SharedPreferences? prefs;
+  RecipeServices recipeServices = RecipeServices();
+  final int randomRecipeCount = 3;
+  late Future<List<Recipe>> recipes;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    recipes = getAllRecipes();
+    initializePreference().whenComplete(() {
+      setState(() {});
+    });
+  }
+
+  Future<List<Recipe>> getAllRecipes() async {
+    return await recipeServices.getRandomRecipes(randomRecipeCount);
+  }
+
+  Future<void> initializePreference() async {
+    prefs = await SharedPreferences.getInstance();
+    username = await prefs!.getString(prefs_Username)!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,10 +75,10 @@ class _HomeState extends State<Home> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("Welcome Back \n joteif",
+                                child: Text("Welcome Back \n" + username,
                                     style: TextStyle(
                                       color: secondaryColor,
-                                      fontSize: 18,
+                                      fontSize: 22,
                                     ),
                                     textAlign: TextAlign.center),
                               ),
@@ -78,12 +106,15 @@ class _HomeState extends State<Home> {
                       child: Text(
                         'Recommended for you',
                         style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 18),
+                            fontWeight: FontWeight.w900, fontSize: 22),
                       ),
                     ),
                   ),
                   Carousel()
                 ],
+              ),
+              SizedBox(
+                height: 10,
               ),
               //Tags
               Row(children: <Widget>[
@@ -96,7 +127,7 @@ class _HomeState extends State<Home> {
                         child: Text(
                           'How are you feeling?',
                           style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 18),
+                              fontWeight: FontWeight.w900, fontSize: 22),
                         ),
                       ),
                     ),
@@ -108,7 +139,23 @@ class _HomeState extends State<Home> {
                           width: MediaQuery.of(context).size.width - 20,
                           margin: EdgeInsets.all(10),
                           child: TagsList(
-                            tags: ["Vegan", "Amercian", "Gluten Free"],
+                            tags: [
+                              Tag(
+                                text: "Vegan",
+                                isActive: true,
+                                isPressable: false,
+                              ),
+                              Tag(
+                                text: "American",
+                                isActive: true,
+                                isPressable: false,
+                              ),
+                              Tag(
+                                text: "Gluten Free",
+                                isActive: true,
+                                isPressable: false,
+                              )
+                            ],
                           ))
                     ]),
                   ],
@@ -121,22 +168,12 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 8,
                       child: Text(
                         'What you might currently want',
                         style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 18),
+                            fontWeight: FontWeight.w900, fontSize: 22),
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Browse',
-                            style: TextStyle(color: primaryColor, fontSize: 13),
-                          )),
-                    )
                   ],
                 ),
               ),
@@ -144,7 +181,7 @@ class _HomeState extends State<Home> {
               Container(
                   height: MediaQuery.of(context).size.height / 4,
                   child: FutureBuilder<List<Recipe>>(
-                      future: getRecipes(),
+                      future: recipes,
                       builder: (BuildContext context,
                           AsyncSnapshot<List<Recipe>> snapshot) {
                         if (snapshot.hasData) {
@@ -160,7 +197,16 @@ class _HomeState extends State<Home> {
                             },
                           );
                         } else {
-                          return Text('Something when wrong');
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 3,
+                            itemBuilder: (BuildContext context, int index) {
+                              return LoadingCard(
+                                width: 150,
+                                height: 200,
+                              );
+                            },
+                          );
                         }
                       })),
             ],

@@ -1,25 +1,18 @@
+import 'dart:convert';
+
 class Recipe {
   late int id;
-  late int ingredientCount;
-  late String name;
-  late String imageURL;
+  late String title;
+  late String image;
 
-  Recipe(
-      {required this.id,
-      required this.name,
-      required this.imageURL,
-      required this.ingredientCount});
+  Recipe({required this.id, required this.title, required this.image});
 
-  factory Recipe.fromMap(Map<String, dynamic> json) => Recipe(
-      id: json["id"],
-      name: json["name"],
-      imageURL: json["imageURL"],
-      ingredientCount: json["ingredient_count"]);
+  factory Recipe.fromMap(Map<String, dynamic> json) =>
+      Recipe(id: json["id"], title: json["title"], image: json["image"]);
 
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
-        "imageURL": imageURL,
-        "ingredientCount": ingredientCount
-      };
+  Map<String, dynamic> toMap() => {"id": id, "title": title, "image": image};
+
+  Recipe recipeFromJson(String str) => Recipe.fromMap(json.decode(str));
+
+  String recipeToJson(Recipe data) => json.encode(data.toMap());
 }
