@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   String username = '';
   SharedPreferences? prefs;
   RecipeServices recipeServices = RecipeServices();
-  final int randomRecipeCount = 3;
+  final int randomRecipeCount = 5;
   late Future<List<Recipe>> recipes;
 
   @override

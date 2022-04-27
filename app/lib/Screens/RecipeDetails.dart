@@ -25,6 +25,7 @@ class RecipeDetails extends StatefulWidget {
 
 class _RecipeDetailsState extends State<RecipeDetails> {
   DetailedRecipe? recipeDetails;
+  bool isFavorite = false;
   bool isLoading = true;
   List<Tag> tagsList = [];
   RecipeServices recipeServices = RecipeServices();
@@ -79,10 +80,24 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                           ),
                         ),
                         //recipe details box
-
-                        Positioned(
-                            child: IconButton(
-                                onPressed: () {}, icon: Icon(Icons.star)))
+                        Center(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 25,
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
+                                  color:
+                                      isFavorite ? primaryColor : tertiaryColor,
+                                  iconSize: 35,
+                                  onPressed: () {
+                                    setState(() {
+                                      isFavorite = !isFavorite;
+                                    });
+                                  },
+                                  icon: Icon(Icons.star),
+                                )),
+                          ),
+                        )
                       ]),
                       //tags list
                       Transform.translate(
