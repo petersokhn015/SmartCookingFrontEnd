@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Ingredient {
   final String imageUrl, name, unit;
   final int amount;
@@ -16,4 +18,9 @@ class Ingredient {
 
   Map<String, dynamic> toMap() =>
       {"unit": unit, "amount": amount, "name": name, "imageUrl": imageUrl};
+
+  Ingredient ingredientsFromJson(String str) =>
+      Ingredient.fromMap(json.decode(str));
+
+  String ingredientToJson(Ingredient data) => json.encode(data.toMap());
 }

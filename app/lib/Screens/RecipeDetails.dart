@@ -23,16 +23,25 @@ class RecipeDetails extends StatefulWidget {
 
 class _RecipeDetailsState extends State<RecipeDetails> {
   DetailedRecipe? recipeDetails;
+  bool isLoading = true;
   List<Tag> tagsList = [];
+  RecipeServices recipeServices = RecipeServices();
 
   @override
   Widget build(BuildContext context) {
-    getInfo();
-    if (tagsList.isEmpty)
-      setState(() {
-        tagsList = generateTags(recipeDetails!.tags);
-      });
-    return recipeDetails == null
+    if (recipeDetails == null) {
+      getInfo();
+    }
+
+    if (recipeDetails != null) {
+      if (tagsList.isEmpty) {
+        setState(() {
+          tagsList = generateTags(recipeDetails!.tags);
+        });
+      }
+    }
+
+    return isLoading
         ? LoadingScreen()
         : SafeArea(
             child: Scaffold(
@@ -98,12 +107,12 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 //name
                                 children: [
                                   Text(
                                     recipeDetails!.title,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w900),
@@ -260,7 +269,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                       steps: recipeDetails!.steps)),
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 20,
                             )
                           ]),
                     ],
@@ -273,8 +282,14 @@ class _RecipeDetailsState extends State<RecipeDetails> {
 
   // get recipe info by id
   void getInfo() {
-    // getRecipeDetails(widget.recipeId)
-    //     .then((value) => {setState(() => recipeDetails = value)});
+    recipeServices.getDetailedRecipe(widget.recipeId).then((value) => {
+          setState(() {
+            if (value != null) {
+              recipeDetails = value;
+              isLoading = false;
+            }
+          })
+        });
   }
 
   //generate tags list

@@ -28,10 +28,14 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    recipes = recipeServices.getRandomRecipes(randomRecipeCount);
+    recipes = getAllRecipes();
     initializePreference().whenComplete(() {
       setState(() {});
     });
+  }
+
+  Future<List<Recipe>> getAllRecipes() async {
+    return await recipeServices.getRandomRecipes(randomRecipeCount);
   }
 
   Future<void> initializePreference() async {
@@ -164,22 +168,12 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 8,
                       child: Text(
                         'What you might currently want',
                         style: TextStyle(
                             fontWeight: FontWeight.w900, fontSize: 22),
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Browse',
-                            style: TextStyle(color: primaryColor, fontSize: 15),
-                          )),
-                    )
                   ],
                 ),
               ),

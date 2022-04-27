@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app/Models/Ingredient.dart';
 
 class DetailedRecipe {
@@ -28,9 +30,11 @@ class DetailedRecipe {
       caloriesAmount: json["caloriesAmount"],
       servings: json["servings"],
       ingredientCount: json["ingredientCount"],
-      tags: json["tags"],
-      ingredients: json["ingredients"],
-      steps: json["steps"]);
+      tags: List<String>.from(json["tags"]),
+      ingredients: json["ingredients"]
+          .map<Ingredient>((e) => Ingredient.fromMap(e))
+          .toList(),
+      steps: List<String>.from(json["steps"]));
 
   Map<String, dynamic> toMap() => {
         "id": id,
@@ -44,4 +48,9 @@ class DetailedRecipe {
         "ingredents": ingredients,
         "steps": steps
       };
+
+  DetailedRecipe detailedRecipeFromJson(String str) =>
+      DetailedRecipe.fromMap(json.decode(str));
+
+  String detailedRecipeToJson(DetailedRecipe data) => json.encode(data.toMap());
 }

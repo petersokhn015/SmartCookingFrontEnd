@@ -17,7 +17,7 @@ class Filter {
   final List<String> cuisineTypes;
   final int maxCookTime;
 
-  factory Filter.fromJson(Map<String, dynamic> json) => Filter(
+  factory Filter.fromMap(Map<String, dynamic> json) => Filter(
         query: json["query"],
         mealType: json["mealType"],
         diet: json["diet"],
@@ -26,7 +26,7 @@ class Filter {
         maxCookTime: json["maxCookTime"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "query": query,
         "mealType": mealType,
         "diet": diet,
@@ -35,7 +35,7 @@ class Filter {
         "maxCookTime": maxCookTime,
       };
 
-  Filter filterFromJson(String str) => Filter.fromJson(json.decode(str));
+  Filter filterFromJson(String str) => Filter.fromMap(json.decode(str));
 
-  String filterToJson(Filter data) => json.encode(data.toJson());
+  String filterToJson(Filter data) => json.encode(data.toMap());
 }

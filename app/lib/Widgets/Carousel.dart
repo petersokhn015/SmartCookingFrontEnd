@@ -1,5 +1,6 @@
 import 'package:app/Models/Recipe.dart';
 import 'package:app/Utils/AppColors.dart';
+import 'package:app/Widgets/LoadingCard.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,27 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   int currentSlide = 0;
+  int randomRecipeCount = 3;
   RecipeServices recipeServices = RecipeServices();
+  late Future<List<Recipe>> recipes;
   final CarouselController controller = CarouselController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    recipes =
+        recipeServices.getRandomRecipes(randomRecipeCount).whenComplete(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         FutureBuilder<List<Recipe>>(
-            future: recipeServices.getRandomRecipes(3),
+            future: recipes,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
@@ -74,7 +88,9 @@ class _CarouselState extends State<Carousel> {
                 );
               }
 
-              return Text('something went wronf');
+              return LoadingCard(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 3);
             }),
       ],
     );

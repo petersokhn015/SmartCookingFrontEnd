@@ -10,16 +10,18 @@ class LoadingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.grey,
-          ),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.grey,
         ),
-        baseColor: secondaryColor,
-        highlightColor: Colors.grey);
+      ),
+      baseColor: secondaryColor,
+      highlightColor: Colors.grey,
+      direction: ShimmerDirection.rtl,
+    );
   }
 }
