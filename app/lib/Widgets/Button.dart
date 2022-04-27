@@ -23,3 +23,26 @@ class Button extends StatelessWidget {
         onPressed: onClicked,
       );
 }
+
+class ButtonPrimary extends StatelessWidget {
+  final String text;
+  final VoidCallback onClicked;
+  const ButtonPrimary({Key? key, required this.text, required this.onClicked})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size.fromHeight(50),
+          primary: primaryColor,
+          shape: StadiumBorder(),
+        ),
+        child: FittedBox(
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 20, color: secondaryColor),
+          ),
+        ),
+        onPressed: onClicked,
+      );
+}

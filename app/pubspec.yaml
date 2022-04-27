@@ -38,13 +38,16 @@ dependencies:
   carousel_slider: ^4.0.0
   flutter_feather_icons: ^2.0.0+1
   loading_indicator: ^3.0.3
-
   dio: ^4.0.0
   json_annotation: ^4.0.1
   shared_preferences: ^2.0.13
   fluttertoast: ^8.0.9
   modal_bottom_sheet: ^2.0.1
   flutter_scroll_to_top: ^2.1.1
+  image_picker: ^0.8.5
+  http: ^0.13.4
+  form_field_validator: ^1.1.0
+  show_more_text_popup: ^0.3.0
   shimmer: ^2.0.0
 
 
