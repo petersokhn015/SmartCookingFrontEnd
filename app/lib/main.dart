@@ -5,7 +5,7 @@ import 'package:app/Services/MyHttpOverrides.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-    HttpOverrides.global = MyHttpOverrides();
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 

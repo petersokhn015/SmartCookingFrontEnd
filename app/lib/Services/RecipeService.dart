@@ -5,13 +5,13 @@ import 'package:app/Utils/AppSettings.dart';
 import 'package:dio/dio.dart';
 
 class RecipeServices {
-  Dio dio = Dio();
+  Dio _dio = Dio();
 
   Future<List<Recipe>> getRandomRecipes(int recipeCount) async {
     List<Recipe> recipes = [];
     try {
-      Response response = await dio.get(RecipeEndpoint +
-          "RandomRecipes?recipeCount=" +
+      Response response = await _dio.get(RecipeEndpoint +
+          "/RandomRecipes?recipeCount=" +
           recipeCount.toString());
       var data = response.data as List;
       recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
@@ -23,14 +23,15 @@ class RecipeServices {
 
   Future<DetailedRecipe?> getDetailedRecipe(int recipeId) async {
     try {
-      Response response = await dio.get(
-          RecipeEndpoint + "RecipeDetails?recipeId=" + recipeId.toString());
+      Response response = await _dio.get(
+          RecipeEndpoint + "/RecipeDetails?recipeId=" + recipeId.toString());
       DetailedRecipe recipe = DetailedRecipe.fromMap(response.data);
       return recipe;
     } catch (e) {
       print(e);
       return null;
     }
+  }
 
   Future<List<Recipe>> getRecipesByIngredients(List<String> ingredients) async {
     List<Recipe> recipes = [];
@@ -45,9 +46,8 @@ class RecipeServices {
         i++;
       }
 
-      Response response = await _dio.get(RecipeEndpoint + ingredient);
+      Response response = await _dio.get(RecipeEndpoint + "?" + ingredient);
       var data = response.data as List;
-
     } on DioError catch (e) {
       if (e.response != null) {
         print('Dio error!');

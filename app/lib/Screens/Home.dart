@@ -1,6 +1,6 @@
 import 'package:app/Models/Recipe.dart';
 import 'package:app/Services/RecipeService.dart';
-import 'package:app/Services/Service.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Carousel.dart';
