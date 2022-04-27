@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:app/Models/DetailedRecipe.dart';
 import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/Strings.dart';
@@ -77,145 +79,148 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                           ),
                         ),
                         //recipe details box
+
                         Positioned(
-                          left: 25,
-                          top: MediaQuery.of(context).size.height / 2.4,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: (Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Color(0xFF303030)
-                                  : secondaryColor),
-                              boxShadow: [
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? BoxShadow(
-                                        color: secondaryColor.withOpacity(0.2),
-                                        blurRadius: 7,
-                                        offset: Offset(0, 3),
-                                      )
-                                    : BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        blurRadius: 2,
-                                        offset: Offset(0, 3),
+                            child: IconButton(
+                                onPressed: () {}, icon: Icon(Icons.star)))
+                      ]),
+                      //tags list
+                      Transform.translate(
+                        offset: Offset(0, -50),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                    ? Color(0xFF303030)
+                                    : secondaryColor),
+                            boxShadow: [
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? BoxShadow(
+                                      color: secondaryColor.withOpacity(0.2),
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3),
+                                    )
+                                  : BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      blurRadius: 2,
+                                      offset: Offset(0, 3),
+                                    ),
+                            ],
+                          ),
+                          //recipe details info
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              //name
+                              children: [
+                                Text(
+                                  recipeDetails!.title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900),
+                                ),
+                                SizedBox(height: 15),
+                                //ingredients count
+                                Text(
+                                  recipeDetails!.ingredientCount == 1
+                                      ? recipeDetails!.ingredientCount
+                                              .toString() +
+                                          ' ingredient'
+                                      : recipeDetails!.ingredientCount
+                                              .toString() +
+                                          ' ingredients',
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                //extra recipe info
+                                Row(
+                                  children: [
+                                    //cook time
+                                    Expanded(
+                                      child: Text.rich(
+                                        TextSpan(children: [
+                                          WidgetSpan(
+                                              child: Tab(
+                                                icon: new Image.asset(
+                                                    cookTimeIcon),
+                                              ),
+                                              alignment:
+                                                  PlaceholderAlignment.middle),
+                                          TextSpan(
+                                              text: " " +
+                                                  recipeDetails!.cookTime
+                                                      .toString() +
+                                                  ' min')
+                                        ]),
+                                        textAlign: TextAlign.center,
                                       ),
+                                      flex: 1,
+                                    ),
+                                    //calories count
+                                    Expanded(
+                                      child: Text.rich(
+                                        TextSpan(children: [
+                                          WidgetSpan(
+                                              child: Tab(
+                                                icon: new Image.asset(
+                                                    caloriesIcon),
+                                              ),
+                                              alignment:
+                                                  PlaceholderAlignment.middle),
+                                          TextSpan(
+                                              text: " " +
+                                                  recipeDetails!.caloriesAmount
+                                                      .toString() +
+                                                  ' kcal')
+                                        ]),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      flex: 1,
+                                    ),
+                                    //servings count
+                                    Expanded(
+                                      child: Text.rich(
+                                        TextSpan(children: [
+                                          WidgetSpan(
+                                              child: Tab(
+                                                icon: new Image.asset(
+                                                    servingsIcon),
+                                              ),
+                                              alignment:
+                                                  PlaceholderAlignment.middle),
+                                          TextSpan(
+                                            text: recipeDetails!.servings == 1
+                                                ? " " +
+                                                    recipeDetails!.servings
+                                                        .toString() +
+                                                    ' serving'
+                                                : " " +
+                                                    recipeDetails!.servings
+                                                        .toString() +
+                                                    ' servings',
+                                          )
+                                        ]),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      flex: 1,
+                                    )
+                                  ],
+                                )
                               ],
-                            ),
-                            //recipe details info
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                //name
-                                children: [
-                                  Text(
-                                    recipeDetails!.title,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                  SizedBox(height: 15),
-                                  //ingredients count
-                                  Text(
-                                    recipeDetails!.ingredientCount == 1
-                                        ? recipeDetails!.ingredientCount
-                                                .toString() +
-                                            ' ingredient'
-                                        : recipeDetails!.ingredientCount
-                                                .toString() +
-                                            ' ingredients',
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  //extra recipe info
-                                  Row(
-                                    children: [
-                                      //cook time
-                                      Expanded(
-                                        child: Text.rich(
-                                          TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Tab(
-                                                  icon: new Image.asset(
-                                                      cookTimeIcon),
-                                                ),
-                                                alignment: PlaceholderAlignment
-                                                    .middle),
-                                            TextSpan(
-                                                text: " " +
-                                                    recipeDetails!.cookTime
-                                                        .toString() +
-                                                    ' min')
-                                          ]),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        flex: 1,
-                                      ),
-                                      //calories count
-                                      Expanded(
-                                        child: Text.rich(
-                                          TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Tab(
-                                                  icon: new Image.asset(
-                                                      caloriesIcon),
-                                                ),
-                                                alignment: PlaceholderAlignment
-                                                    .middle),
-                                            TextSpan(
-                                                text: " " +
-                                                    recipeDetails!
-                                                        .caloriesAmount
-                                                        .toString() +
-                                                    ' kcal')
-                                          ]),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        flex: 1,
-                                      ),
-                                      //servings count
-                                      Expanded(
-                                        child: Text.rich(
-                                          TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Tab(
-                                                  icon: new Image.asset(
-                                                      servingsIcon),
-                                                ),
-                                                alignment: PlaceholderAlignment
-                                                    .middle),
-                                            TextSpan(
-                                              text: recipeDetails!.servings == 1
-                                                  ? " " +
-                                                      recipeDetails!.servings
-                                                          .toString() +
-                                                      ' serving'
-                                                  : " " +
-                                                      recipeDetails!.servings
-                                                          .toString() +
-                                                      ' servings',
-                                            )
-                                          ]),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        flex: 1,
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
                             ),
                           ),
                         ),
-                      ]),
-                      //tags list
-                      Center(
-                        child: Padding(
-                            padding: EdgeInsets.only(top: 80),
-                            child: TagsList(tags: tagsList)),
+                      ),
+                      Transform.translate(
+                        offset: Offset(0, -10),
+                        child: Center(
+                          child: TagsList(tags: tagsList),
+                        ),
                       ),
 
                       //ingredients list
