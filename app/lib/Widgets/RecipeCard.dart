@@ -58,7 +58,6 @@ class RecipeCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: SizedBox(
-                          width: width! / 1.2,
                           child: Text(
                             recipe.title,
                             style: TextStyle(
