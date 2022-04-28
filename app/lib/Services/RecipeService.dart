@@ -54,7 +54,6 @@ class RecipeServices {
 
       var data = response.data as List;
       recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
-
     } on DioError catch (e) {
       if (e.response != null) {
         print('Dio error!');

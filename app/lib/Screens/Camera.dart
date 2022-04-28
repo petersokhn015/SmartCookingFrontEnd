@@ -129,10 +129,10 @@ class _CameraState extends State<Camera> {
                         backgroundColor: primaryColor,
                         heroTag: lbl_Get_Recipe,
                         onPressed: () {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) => Browse(
-                          //           ingredientList: ingredients,
-                          //         )));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Browse(
+                                    ingredientList: ["apple", "banana"],
+                                  )));
                           RecipeServices rec = RecipeServices();
                           var data = ["apple", "banana"];
                           rec.getRecipesByIngredients(data);
