@@ -12,7 +12,19 @@ class Recipe {
 
   Map<String, dynamic> toMap() => {"id": id, "title": title, "image": image};
 
-  Recipe recipeFromJson(String str) => Recipe.fromMap(json.decode(str));
+  factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
+        id: json["id"],
+        image: json["image"],
+        title: json["title"],
+    );
 
-  String recipeToJson(Recipe data) => json.encode(data.toMap());
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "image": image,
+        "title": title,
+    };
+
+  // Recipe recipeFromJson(String str) => Recipe.fromMap(json.decode(str));
+
+  // String recipeToJson(Recipe data) => json.encode(data.toMap());
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:app/Screens/Browse.dart';
 import 'package:app/Screens/SetPreferences.dart';
 import 'package:app/Services/CameraService.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Button.dart';
@@ -128,11 +129,13 @@ class _CameraState extends State<Camera> {
                         backgroundColor: primaryColor,
                         heroTag: lbl_Get_Recipe,
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Browse(
-                                    ingredientList: ingredients,
-                                  )));
-
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (context) => Browse(
+                          //           ingredientList: ingredients,
+                          //         )));
+                          RecipeServices rec = RecipeServices();
+                          var data = ["apple", "banana"];
+                          rec.getRecipesByIngredients(data);
                           // Navigator.of(context).push(MaterialPageRoute(
                           //     builder: (context) => SetPreferences()));
                         },

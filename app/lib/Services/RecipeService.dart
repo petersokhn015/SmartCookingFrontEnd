@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:app/Models/DetailedRecipe.dart';
 import 'package:app/Models/Recipe.dart';
 
@@ -36,18 +39,22 @@ class RecipeServices {
   Future<List<Recipe>> getRecipesByIngredients(List<String> ingredients) async {
     List<Recipe> recipes = [];
     try {
-      int i = 0;
       String ingredient = '';
       for (var element in ingredients) {
-        if (i >= ingredients.length) {
-          ingredient += "ingredients=" + element;
-        }
-        ingredient += "ingredients=" + element + "&";
-        i++;
+        ingredient += element + " ";
       }
 
-      Response response = await _dio.get(RecipeEndpoint + "?" + ingredient);
+      Response response = await _dio.post(
+        RecipeEndpoint + "/RecipeByIngredient",
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        }),
+        data: [ingredient],
+      );
+
       var data = response.data as List;
+      recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+
     } on DioError catch (e) {
       if (e.response != null) {
         print('Dio error!');
