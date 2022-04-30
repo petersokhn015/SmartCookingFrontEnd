@@ -100,6 +100,8 @@ class _BrowseState extends State<Browse> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return RecipeCard(
+                                          height: 200,
+                                          width: 150,
                                           recipe: snapshot.data![index]);
                                     })
                                 : GridView.builder(
