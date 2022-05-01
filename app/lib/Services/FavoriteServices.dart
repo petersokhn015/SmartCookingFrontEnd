@@ -26,12 +26,12 @@ class FavoriteServices {
 
   Future<bool> addFavorite(int userId, DetailedRecipe detailedRecipe) async {
     try {
-      Response response =
-          await _dio.post(FavoriteEndpoint + "Favourite?userId=1",
-              options: Options(headers: {
-                HttpHeaders.contentTypeHeader: "application/json",
-              }),
-              data: detailedRecipe.detailedRecipeToJson(detailedRecipe));
+      Response response = await _dio.post(
+          FavoriteEndpoint + "Favourite?userId=" + userId.toString(),
+          options: Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          }),
+          data: detailedRecipe.detailedRecipeToJson(detailedRecipe));
 
       if (response.statusCode == 200) {
         return true;
@@ -47,7 +47,8 @@ class FavoriteServices {
     Response response = await _dio.delete(FavoriteEndpoint +
         "Favourite?recipeId=" +
         recipeId.toString() +
-        "&userId=1");
+        "&userId=" +
+        userId.toString());
     if (response.statusCode == 200) {
       return true;
     }

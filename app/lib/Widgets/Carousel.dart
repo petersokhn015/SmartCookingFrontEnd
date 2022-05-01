@@ -6,7 +6,6 @@ import 'package:app/Widgets/RecipeCard.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Services/RecipeService.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({Key? key}) : super(key: key);
@@ -17,8 +16,6 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   int currentSlide = 0;
-  int randomRecipeCount = 3;
-  RecipeServices recipeServices = RecipeServices();
   late List<Recipe> recipes;
   final CarouselController controller = CarouselController();
 

@@ -1,13 +1,11 @@
 import 'package:app/Models/DetailedRecipe.dart';
 import 'package:app/Models/Recipe.dart';
-import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Services/FavoriteServices.dart';
 import 'package:app/Services/UserServices.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteProvider extends ChangeNotifier {
   FavoriteServices favoriteServices = FavoriteServices();
-  UserProvider userProvider = UserProvider();
   UserServices userServices = UserServices();
   List<Recipe> favorites = [];
   bool isFavorite;
@@ -16,12 +14,10 @@ class FavoriteProvider extends ChangeNotifier {
     this.isFavorite = false,
   });
 
-  setFavorites(String username) {
-    userServices.getUserId(username).then((value) {
-      getAllFavorites(value).then((value) {
-        favorites = value;
-        notifyListeners();
-      });
+  setFavorites(int recipeId) {
+    getAllFavorites(recipeId).then((value) {
+      favorites = value;
+      notifyListeners();
     });
   }
 

@@ -114,8 +114,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                                 Provider.of<UserProvider>(
                                                         context,
                                                         listen: false)
-                                                    .savedUser
-                                                    .id,
+                                                    .savedId,
                                                 detailedRecipe!.id);
                                       } else {
                                         Provider.of<FavoriteProvider>(context,
@@ -124,8 +123,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                                 Provider.of<UserProvider>(
                                                         context,
                                                         listen: false)
-                                                    .savedUser
-                                                    .id,
+                                                    .savedId,
                                                 detailedRecipe!);
                                       }
                                     },

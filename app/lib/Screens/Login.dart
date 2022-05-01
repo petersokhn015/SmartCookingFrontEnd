@@ -1,16 +1,12 @@
-import 'package:app/Models/User.dart';
 import 'package:app/Providers/UserProvider.dart';
-import 'package:app/Screens/Home.dart';
 import 'package:app/Screens/MainPage.dart';
 import 'package:app/Screens/SignUp.dart';
 import 'package:app/Services/LoginService.dart';
-import 'package:app/Services/UserServices.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
-import 'package:app/Widgets/Button.dart';
-import 'package:app/Widgets/InputField.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -26,7 +22,6 @@ class _LoginState extends State<Login> {
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  UserProvider userProvider = UserProvider();
   bool _isObscure = true;
   bool _isVisible = false;
   LoginService _loginService = LoginService();
@@ -194,9 +189,10 @@ class _LoginState extends State<Login> {
                                       await prefs.setBool(
                                           prefs_isLoggedIn, true);
 
-                                      userProvider.saveUser(
-                                          usernameController.text,
-                                          passwordController.text);
+                                      Provider.of<UserProvider>(context,
+                                              listen: false)
+                                          .saveUser(usernameController.text,
+                                              passwordController.text);
 
                                       Navigator.of(context).push(
                                           MaterialPageRoute(

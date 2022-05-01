@@ -1,5 +1,4 @@
 import 'package:app/Models/Recipe.dart';
-import 'package:app/Providers/FavoritesProvider.dart';
 import 'package:app/Providers/HomeProvider.dart';
 import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Utils/AppColors.dart';
@@ -21,23 +20,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String username = '';
   SharedPreferences? prefs;
   late List<Recipe> recipes = [];
-
-  UserProvider userProvider = UserProvider();
-
-  @override
-  void initState() {
-    initializePreference().whenComplete(() {
-      setState(() {});
-    });
-  }
-
-  Future<void> initializePreference() async {
-    prefs = await SharedPreferences.getInstance();
-    username = await prefs!.getString(prefs_Username)!;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +54,17 @@ class _HomeState extends State<Home> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                              "Welcome Back \n" +
-                                  userProvider.savedUser.username,
-                              style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 22,
-                              ),
-                              textAlign: TextAlign.center),
+                          child: Consumer<UserProvider>(
+                            builder: (context, value, child) => Text(
+                                "Welcome Back \n" +
+                                    Provider.of<UserProvider>(context)
+                                        .savedUsername,
+                                style: TextStyle(
+                                  color: secondaryColor,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center),
+                          ),
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width / 3.5,
