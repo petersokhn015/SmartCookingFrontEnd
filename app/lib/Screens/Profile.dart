@@ -1,4 +1,4 @@
-
+import 'package:app/Screens/Favorites.dart';
 import 'package:app/Screens/MyPreferences.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
@@ -16,7 +16,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   String username = '';
   SharedPreferences? prefs;
 
@@ -33,15 +32,16 @@ class _ProfileState extends State<Profile> {
     prefs = await SharedPreferences.getInstance();
     username = await prefs!.getString(prefs_Username)!;
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
-              child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
               child: Column(
                 children: [
                   SizedBox(
@@ -104,29 +104,38 @@ class _ProfileState extends State<Profile> {
                   SizedBox(
                     height: 50,
                   ),
-                  AccesButton(title: lbl_My_Account, icon: FeatherIcons.user, onPressed: (){
-
-                  },),
+                  AccesButton(
+                    title: lbl_My_Account,
+                    icon: FeatherIcons.user,
+                    onPressed: () {},
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   AccesButton(
-                      title: lbl_My_Preferences, icon: FeatherIcons.database, onPressed:  () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => myPreferences()));
-                      },),
+                    title: lbl_My_Preferences,
+                    icon: FeatherIcons.database,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => myPreferences()));
+                    },
+                  ),
                   SizedBox(
                     height: 10,
                   ),
-                  AccesButton(title: lbl_My_Favorites, icon: Icons.star, onPressed: () {
-
-                  },),
+                  AccesButton(
+                    title: lbl_My_Favorites,
+                    icon: Icons.star,
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Favorite()));
+                    },
+                  ),
                 ],
               ),
-                      ),
-                    ),
-            )),
-
+            ),
+          ),
+        )),
       ),
     );
   }

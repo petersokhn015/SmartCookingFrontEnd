@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_scroll_to_top/flutter_scroll_to_top.dart';
 
 class BackToTop extends StatelessWidget {
-  Widget widget;
+  Widget child;
   BackToTop({
     Key? key,
-    required this.widget,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class BackToTop extends StatelessWidget {
       promptAlignment: Alignment.bottomRight,
       enabledAtOffset: 100,
       alwaysVisibleAtOffset: true,
-      builder: ((context, properties) => widget),
+      builder: ((context, properties) => child),
     );
   }
 }
