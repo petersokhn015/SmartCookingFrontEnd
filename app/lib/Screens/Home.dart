@@ -1,5 +1,7 @@
 import 'package:app/Models/Recipe.dart';
+import 'package:app/Providers/FavoritesProvider.dart';
 import 'package:app/Providers/HomeProvider.dart';
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/Carousel.dart';
@@ -22,10 +24,11 @@ class _HomeState extends State<Home> {
   String username = '';
   SharedPreferences? prefs;
   late List<Recipe> recipes = [];
+
+  UserProvider userProvider = UserProvider();
+
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     initializePreference().whenComplete(() {
       setState(() {});
     });
@@ -67,7 +70,9 @@ class _HomeState extends State<Home> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("Welcome Back \n" + username,
+                          child: Text(
+                              "Welcome Back \n" +
+                                  userProvider.savedUser.username,
                               style: TextStyle(
                                 color: secondaryColor,
                                 fontSize: 22,
@@ -171,8 +176,7 @@ class _HomeState extends State<Home> {
             height: MediaQuery.of(context).size.height / 4,
             child: Consumer<HomeProvider>(builder: (context, cart, child) {
               return Builder(builder: (context) {
-                final recipeProvider =
-                    Provider.of<HomeProvider>(context, listen: false);
+                final recipeProvider = Provider.of<HomeProvider>(context);
                 if (!recipeProvider.currentRecipes.isEmpty) {
                   recipes = recipeProvider.currentRecipes;
                   return ListView.builder(

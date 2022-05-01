@@ -24,7 +24,7 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    final recipeProvider = Provider.of<HomeProvider>(context, listen: false);
+    final recipeProvider = Provider.of<HomeProvider>(context);
     return Consumer<HomeProvider>(builder: (context, cart, child) {
       return Column(
         children: <Widget>[

@@ -16,8 +16,11 @@ class RecipeServices {
       Response response = await _dio.get(RecipeEndpoint +
           "/RandomRecipes?recipeCount=" +
           recipeCount.toString());
-      var data = response.data as List;
-      recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+
+      if (response.statusCode == 200) {
+        var data = response.data as List;
+        recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+      }
     } catch (e) {
       print(e);
     }
@@ -28,8 +31,11 @@ class RecipeServices {
     try {
       Response response = await _dio.get(
           RecipeEndpoint + "/RecipeDetails?recipeId=" + recipeId.toString());
-      DetailedRecipe recipe = DetailedRecipe.fromMap(response.data);
-      return recipe;
+
+      if (response.statusCode == 200) {
+        DetailedRecipe recipe = DetailedRecipe.fromMap(response.data);
+        return recipe;
+      }
     } catch (e) {
       print(e);
       return null;
@@ -52,8 +58,10 @@ class RecipeServices {
         data: [ingredient],
       );
 
-      var data = response.data as List;
-      recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+      if (response.statusCode == 200) {
+        var data = response.data as List;
+        recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+      }
     } on DioError catch (e) {
       if (e.response != null) {
         print('Dio error!');

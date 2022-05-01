@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:app/Models/Ingredient.dart';
 
@@ -45,7 +46,8 @@ class DetailedRecipe {
         "servings": servings,
         "ingedientCount": ingredientCount,
         "tags": tags,
-        "ingredents": ingredients,
+        "ingredents":
+            ingredients.map<String>((e) => e.ingredientToJson(e)).toList(),
         "steps": steps
       };
 

@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:app/Providers/FavoritesProvider.dart';
 import 'package:app/Providers/HomeProvider.dart';
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/SplashScreen.dart';
 import 'package:app/Services/MyHttpOverrides.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => HomeProvider())
+          ChangeNotifierProvider(create: (context) => HomeProvider()),
+          ChangeNotifierProvider(create: (context) => UserProvider()),
+          ChangeNotifierProvider(create: (context) => FavoriteProvider())
         ],
         child: MaterialApp(
           title: 'Cooking Panda',

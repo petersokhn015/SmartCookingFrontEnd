@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:app/Models/DetailedRecipe.dart';
+import 'package:app/Providers/FavoritesProvider.dart';
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Services/RecipeService.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/BackToTop.dart';
@@ -11,6 +13,7 @@ import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/Tag.dart';
 import 'package:app/Widgets/TagsList.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecipeDetails extends StatefulWidget {
   final int recipeId;
@@ -24,22 +27,30 @@ class RecipeDetails extends StatefulWidget {
 }
 
 class _RecipeDetailsState extends State<RecipeDetails> {
-  DetailedRecipe? recipeDetails;
+  DetailedRecipe? detailedRecipe;
   bool isFavorite = false;
   bool isLoading = true;
   List<Tag> tagsList = [];
   RecipeServices recipeServices = RecipeServices();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isFavorite = Provider.of<FavoriteProvider>(context, listen: false)
+        .checkIfIsFavorite(widget.recipeId);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (recipeDetails == null) {
+    if (detailedRecipe == null) {
       getInfo();
     }
 
-    if (recipeDetails != null) {
+    if (detailedRecipe != null) {
       if (tagsList.isEmpty) {
         setState(() {
-          tagsList = generateTags(recipeDetails!.tags);
+          tagsList = generateTags(detailedRecipe!.tags);
         });
       }
     }
@@ -54,7 +65,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
         body: isLoading
             ? LoadingScreen()
             : BackToTop(
-                widget: SingleChildScrollView(
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Stack(clipBehavior: Clip.none, children: [
@@ -74,7 +85,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                     bottomLeft: Radius.circular(30),
                                     bottomRight: Radius.circular(30)),
                                 image: DecorationImage(
-                                  image: NetworkImage(recipeDetails!.image),
+                                  image: NetworkImage(detailedRecipe!.image),
                                   fit: BoxFit.cover,
                                 )),
                           ),
@@ -85,17 +96,42 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                             width: MediaQuery.of(context).size.width - 25,
                             child: Align(
                                 alignment: Alignment.topRight,
-                                child: IconButton(
-                                  color:
-                                      isFavorite ? primaryColor : tertiaryColor,
-                                  iconSize: 35,
-                                  onPressed: () {
-                                    setState(() {
-                                      isFavorite = !isFavorite;
-                                    });
-                                  },
-                                  icon: Icon(Icons.star),
-                                )),
+                                child: Consumer<FavoriteProvider>(
+                                    builder: (context, cart, child) {
+                                  isFavorite =
+                                      Provider.of<FavoriteProvider>(context)
+                                          .isFavorite;
+                                  return IconButton(
+                                    color: isFavorite
+                                        ? primaryColor
+                                        : tertiaryColor,
+                                    iconSize: 35,
+                                    onPressed: () {
+                                      if (isFavorite) {
+                                        Provider.of<FavoriteProvider>(context,
+                                                listen: false)
+                                            .removeFavorite(
+                                                Provider.of<UserProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .savedUser
+                                                    .id,
+                                                detailedRecipe!.id);
+                                      } else {
+                                        Provider.of<FavoriteProvider>(context,
+                                                listen: false)
+                                            .addFavorite(
+                                                Provider.of<UserProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .savedUser
+                                                    .id,
+                                                detailedRecipe!);
+                                      }
+                                    },
+                                    icon: Icon(Icons.star),
+                                  );
+                                })),
                           ),
                         )
                       ]),
@@ -132,7 +168,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                               //name
                               children: [
                                 Text(
-                                  recipeDetails!.title,
+                                  detailedRecipe!.title,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 20,
@@ -141,11 +177,11 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                 SizedBox(height: 15),
                                 //ingredients count
                                 Text(
-                                  recipeDetails!.ingredientCount == 1
-                                      ? recipeDetails!.ingredientCount
+                                  detailedRecipe!.ingredientCount == 1
+                                      ? detailedRecipe!.ingredientCount
                                               .toString() +
                                           ' ingredient'
-                                      : recipeDetails!.ingredientCount
+                                      : detailedRecipe!.ingredientCount
                                               .toString() +
                                           ' ingredients',
                                 ),
@@ -168,7 +204,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                                   PlaceholderAlignment.middle),
                                           TextSpan(
                                               text: " " +
-                                                  recipeDetails!.cookTime
+                                                  detailedRecipe!.cookTime
                                                       .toString() +
                                                   ' min')
                                         ]),
@@ -189,7 +225,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                                   PlaceholderAlignment.middle),
                                           TextSpan(
                                               text: " " +
-                                                  recipeDetails!.caloriesAmount
+                                                  detailedRecipe!.caloriesAmount
                                                       .toString() +
                                                   ' kcal')
                                         ]),
@@ -209,13 +245,13 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                               alignment:
                                                   PlaceholderAlignment.middle),
                                           TextSpan(
-                                            text: recipeDetails!.servings == 1
+                                            text: detailedRecipe!.servings == 1
                                                 ? " " +
-                                                    recipeDetails!.servings
+                                                    detailedRecipe!.servings
                                                         .toString() +
                                                     ' serving'
                                                 : " " +
-                                                    recipeDetails!.servings
+                                                    detailedRecipe!.servings
                                                         .toString() +
                                                     ' servings',
                                           )
@@ -258,7 +294,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                               child: Container(
                                 height: MediaQuery.of(context).size.height / 4,
                                 child: IngredientsList(
-                                    ingredients: recipeDetails!.ingredients),
+                                    ingredients: detailedRecipe!.ingredients),
                               ),
                             )
                           ]),
@@ -285,7 +321,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                                     color: primaryColor,
                                   ),
                                   child: InstructionsList(
-                                      steps: recipeDetails!.steps)),
+                                      steps: detailedRecipe!.steps)),
                             ),
                             SizedBox(
                               height: 20,
@@ -304,7 +340,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
     recipeServices.getDetailedRecipe(widget.recipeId).then((value) => {
           setState(() {
             if (value != null) {
-              recipeDetails = value;
+              detailedRecipe = value;
               isLoading = false;
             }
           })

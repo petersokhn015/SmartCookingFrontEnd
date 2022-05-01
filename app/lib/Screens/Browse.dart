@@ -4,7 +4,9 @@ import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/BackToTop.dart';
 import 'package:app/Widgets/FilterOverlay.dart';
 import 'package:app/Widgets/LoadingCard.dart';
+import 'package:app/Widgets/LoadingGrid.dart';
 import 'package:app/Widgets/RecipeCard.dart';
+import 'package:app/Widgets/RecipesGrid.dart';
 import 'package:flutter/material.dart';
 import 'package:app/Models/Recipe.dart';
 
@@ -85,37 +87,12 @@ class _BrowseState extends State<Browse> {
               ),
               Expanded(
                   child: BackToTop(
-                      widget: FutureBuilder<List<Recipe>>(
+                      child: FutureBuilder<List<Recipe>>(
                           future: recipeList,
                           builder: (context, snapshot) {
                             return snapshot.data != null
-                                ? GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 2.0,
-                                            mainAxisSpacing: 2.0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return RecipeCard(
-                                          height: 200,
-                                          width: 150,
-                                          recipe: snapshot.data![index]);
-                                    })
-                                : GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: 8,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 2.0,
-                                            mainAxisSpacing: 2.0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return LoadingCard();
-                                    });
+                                ? RecipesGrid(recipes: snapshot.data!)
+                                : LoadingGrid();
                           })))
             ])));
   }

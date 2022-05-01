@@ -1,13 +1,11 @@
 import 'package:app/Models/Recipe.dart';
 import 'package:app/Services/RecipeService.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeProvider extends ChangeNotifier {
   RecipeServices recipeServices = RecipeServices();
   List<Recipe> recommendedRecipes = [];
   List<Recipe> currentRecipes = [];
-  final int randomRecipeCount = 5;
 
   HomeProvider() {
     setRecommendedRecipes();
@@ -33,6 +31,6 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<List<Recipe>> getAllRecipes2() async {
-    return await recipeServices.getRandomRecipes(randomRecipeCount);
+    return await recipeServices.getRandomRecipes(5);
   }
 }
