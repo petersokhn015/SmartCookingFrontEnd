@@ -45,17 +45,12 @@ class RecipeServices {
   Future<List<Recipe>> getRecipesByIngredients(List<String> ingredients) async {
     List<Recipe> recipes = [];
     try {
-      String ingredient = '';
-      for (var element in ingredients) {
-        ingredient += element + " ";
-      }
-
       Response response = await _dio.post(
         RecipeEndpoint + "/RecipeByIngredient",
         options: Options(headers: {
           HttpHeaders.contentTypeHeader: "application/json",
         }),
-        data: [ingredient],
+        data: ingredients,
       );
 
       if (response.statusCode == 200) {

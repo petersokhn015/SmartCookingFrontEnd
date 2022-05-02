@@ -1,4 +1,4 @@
-const BaseUrl = "http://192.168.1.4:5004/api/";
+const BaseUrl = "http://10.0.2.2:5004/api/";
 const UserEndpoint = BaseUrl + "Users/";
 const RecipeEndpoint = BaseUrl + "Recipes";
 const FavoriteEndpoint = BaseUrl + "Favourites/";

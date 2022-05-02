@@ -131,7 +131,7 @@ class _CameraState extends State<Camera> {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => Browse(
-                                    ingredientList: ingredients,
+                                    ingredientList: ["banana", "apple"],
                                   )));
                           // Navigator.of(context).push(MaterialPageRoute(
                           //     builder: (context) => SetPreferences()));

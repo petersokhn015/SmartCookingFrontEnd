@@ -1,14 +1,13 @@
-import 'package:app/Services/RecipeService.dart';
+import 'package:app/Providers/BrowseProvider.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/BackToTop.dart';
 import 'package:app/Widgets/FilterOverlay.dart';
 import 'package:app/Widgets/LoadingCard.dart';
-import 'package:app/Widgets/LoadingGrid.dart';
 import 'package:app/Widgets/RecipeCard.dart';
-import 'package:app/Widgets/RecipesGrid.dart';
 import 'package:flutter/material.dart';
 import 'package:app/Models/Recipe.dart';
+import 'package:provider/provider.dart';
 
 class Browse extends StatefulWidget {
   late List<String> ingredientList;
@@ -22,16 +21,18 @@ class Browse extends StatefulWidget {
 }
 
 class _BrowseState extends State<Browse> {
-  Future<List<Recipe>>? recipeList;
-  RecipeServices recipeServices = RecipeServices();
+  List<Recipe>? recipeList;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    recipeList = Provider.of<BrowseProvider>(context, listen: false)
+        .setBrowseRecipes(widget.ingredientList);
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (recipeList == null)
-      setState(() {
-        recipeList = getRecipes();
-      });
-
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -91,41 +92,49 @@ class _BrowseState extends State<Browse> {
               SizedBox(
                 height: 15,
               ),
-              Expanded(
-                  child: BackToTop(
-                      child: FutureBuilder<List<Recipe>>(
-                          future: recipeList,
-                          builder: (context, snapshot) {
-                            return snapshot.data != null
-                                ? GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 2.0,
-                                            mainAxisSpacing: 2.0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return RecipeCard(
-                                        height: 150,
-                                        recipe: snapshot.data![index],
-                                        width: 150,
-                                      );
-                                    })
-                                : GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: 8,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 2.0,
-                                            mainAxisSpacing: 2.0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return LoadingCard();
-                                    });
-                          })))
+              Expanded(child: BackToTop(child:
+                  Consumer<BrowseProvider>(builder: (context, cart, child) {
+                return Builder(builder: (context) {
+                  if (!Provider.of<BrowseProvider>(context)
+                      .browseRecipes
+                      .isEmpty) {
+                    recipeList =
+                        Provider.of<BrowseProvider>(context).browseRecipes;
+                    return GridView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: recipeList!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return RecipeCard(
+                          recipe: recipeList![index],
+                          width: 150,
+                          height: 200,
+                        );
+                      },
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 2.0,
+                              mainAxisSpacing: 2.0),
+                    );
+                  } else {
+                    return GridView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: 8,
+                      itemBuilder: (BuildContext context, int index) {
+                        return LoadingCard(
+                          width: 150,
+                          height: 200,
+                        );
+                      },
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 2.0,
+                              mainAxisSpacing: 2.0),
+                    );
+                  }
+                });
+              })))
             ])));
   }
 
@@ -139,9 +148,5 @@ class _BrowseState extends State<Browse> {
               child: FilterOverlay(
                   onSaveCallback: () {}, onCancelCallback: () {}));
         });
-  }
-
-  Future<List<Recipe>> getRecipes() async {
-    return await recipeServices.getRecipesByIngredients(widget.ingredientList);
   }
 }

@@ -81,41 +81,37 @@ class _FilterOverlayState extends State<FilterOverlay> {
                     color: primaryColor,
                     width: MediaQuery.of(context).size.width,
                     height: 60,
-                    child: Center(
-                      child: Text(
-                        'Filters',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: secondaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 10, 0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Filters',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                  color: secondaryColor),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.close),
+                            color: secondaryColor,
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.check),
+                            color: secondaryColor,
+                          )
+                        ],
                       ),
                     ),
                   ),
                   SizedBox(
                     height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Tag(
-                        text: 'Cancel',
-                        isActive: false,
-                        isPressable: true,
-                        voidCallback: widget.onCancelCallback,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Tag(
-                        text: 'Save',
-                        isActive: true,
-                        isPressable: true,
-                        voidCallback: widget.onSaveCallback,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                    ],
                   ),
                   SizedBox(
                     height: 10,
