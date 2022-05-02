@@ -1,10 +1,11 @@
-import 'package:app/Services/RecipeService.dart';
+import 'package:app/Providers/BrowseProvider.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/DropdownContent.dart';
 import 'package:app/Widgets/DropdownContentTile.dart';
 import 'package:app/Widgets/Tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class FilterOverlay extends StatefulWidget {
   final VoidCallback onSaveCallback, onCancelCallback;
@@ -19,6 +20,9 @@ class FilterOverlay extends StatefulWidget {
 }
 
 class _FilterOverlayState extends State<FilterOverlay> {
+  TextEditingController cookTimeController = TextEditingController();
+  TextEditingController queryController = TextEditingController();
+
   List<DropDownItem> dietItems = [
     DropDownItem(
         body: DropdownContentTile(tags: [
@@ -102,7 +106,9 @@ class _FilterOverlayState extends State<FilterOverlay> {
                             color: secondaryColor,
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              applyFilter(context);
+                            },
                             icon: Icon(Icons.check),
                             color: secondaryColor,
                           )
@@ -194,6 +200,12 @@ class _FilterOverlayState extends State<FilterOverlay> {
       ));
     }
     return tagsList;
+  }
+
+  applyFilter(BuildContext context) {
+    if (cookTimeController.text.isNotEmpty)
+      Provider.of<BrowseProvider>(context).browseFilter.maxCookTime =
+          int.parse(cookTimeController.text);
   }
 }
 

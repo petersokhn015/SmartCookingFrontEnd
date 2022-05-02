@@ -10,12 +10,12 @@ class Filter {
     required this.maxCookTime,
   });
 
-  final String query;
-  final String mealType;
-  final String diet;
-  final List<String> intolerances;
-  final List<String> cuisineTypes;
-  final int maxCookTime;
+  late String query;
+  late String mealType;
+  late String diet;
+  late List<String> intolerances;
+  late List<String> cuisineTypes;
+  late int maxCookTime;
 
   factory Filter.fromMap(Map<String, dynamic> json) => Filter(
         query: json["query"],

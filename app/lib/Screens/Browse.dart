@@ -3,8 +3,8 @@ import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/BackToTop.dart';
 import 'package:app/Widgets/FilterOverlay.dart';
-import 'package:app/Widgets/LoadingCard.dart';
-import 'package:app/Widgets/RecipeCard.dart';
+import 'package:app/Widgets/LoadingGrid.dart';
+import 'package:app/Widgets/RecipesGrid.dart';
 import 'package:flutter/material.dart';
 import 'package:app/Models/Recipe.dart';
 import 'package:provider/provider.dart';
@@ -100,38 +100,9 @@ class _BrowseState extends State<Browse> {
                       .isEmpty) {
                     recipeList =
                         Provider.of<BrowseProvider>(context).browseRecipes;
-                    return GridView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: recipeList!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return RecipeCard(
-                          recipe: recipeList![index],
-                          width: 150,
-                          height: 200,
-                        );
-                      },
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 2.0,
-                              mainAxisSpacing: 2.0),
-                    );
+                    return RecipesGrid(recipes: recipeList!);
                   } else {
-                    return GridView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: 8,
-                      itemBuilder: (BuildContext context, int index) {
-                        return LoadingCard(
-                          width: 150,
-                          height: 200,
-                        );
-                      },
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 2.0,
-                              mainAxisSpacing: 2.0),
-                    );
+                    return LoadingGrid();
                   }
                 });
               })))
