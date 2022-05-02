@@ -35,6 +35,12 @@ class _BrowseState extends State<Browse> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
               backgroundColor: primaryColor,
               centerTitle: true,
               title: Text("Browse"),
@@ -91,8 +97,34 @@ class _BrowseState extends State<Browse> {
                           future: recipeList,
                           builder: (context, snapshot) {
                             return snapshot.data != null
-                                ? RecipesGrid(recipes: snapshot.data!)
-                                : LoadingGrid();
+                                ? GridView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.length,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 2.0,
+                                            mainAxisSpacing: 2.0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return RecipeCard(
+                                        height: 150,
+                                        recipe: snapshot.data![index],
+                                        width: 150,
+                                      );
+                                    })
+                                : GridView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 8,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 2.0,
+                                            mainAxisSpacing: 2.0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return LoadingCard();
+                                    });
                           })))
             ])));
   }

@@ -74,6 +74,7 @@ class _MainPageState extends State<MainPage> {
                     },
                     icon: Icon(isDark ? _iconDark : _iconLight)),
               ],
+              elevation: 0.2,
               centerTitle: true,
               title: Image(
                 image: AssetImage(appLogoNoText),
