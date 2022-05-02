@@ -1,4 +1,4 @@
-import 'package:app/Services/Service.dart';
+import 'package:app/Services/RecipeService.dart';
 import 'package:app/Widgets/Tag.dart';
 import 'package:flutter/material.dart';
 

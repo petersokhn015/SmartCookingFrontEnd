@@ -13,8 +13,8 @@ class Welcome extends StatefulWidget {
 
 class _WelcomeState extends State<Welcome> {
   void choicesPage() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Choices()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Choices()));
   }
 
   @override
