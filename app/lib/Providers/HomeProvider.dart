@@ -13,7 +13,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   setRecommendedRecipes() {
-    getAllRecipes().then((value) {
+    getRecommendedRecipes().then((value) {
       recommendedRecipes = value;
       notifyListeners();
     });
@@ -26,11 +26,11 @@ class HomeProvider extends ChangeNotifier {
     });
   }
 
-  Future<List<Recipe>> getAllRecipes() async {
-    return await recipeServices.getRandomRecipes(3);
+  Future<List<Recipe>> getRecommendedRecipes() async {
+    return await recipeServices.getRandomRecipes();
   }
 
   Future<List<Recipe>> getAllRecipes2() async {
-    return await recipeServices.getRandomRecipes(5);
+    return await recipeServices.getRandomRecipes();
   }
 }
