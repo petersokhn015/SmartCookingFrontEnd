@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/Providers/BrowseProvider.dart';
 import 'package:app/Providers/FavoritesProvider.dart';
 import 'package:app/Providers/HomeProvider.dart';
 import 'package:app/Providers/PreferencesProvider.dart';
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => HomeProvider()),
           ChangeNotifierProvider(create: (context) => UserProvider()),
-          ChangeNotifierProvider(create: (context) => PreferenceProvider()),
-          ChangeNotifierProvider(create: (context) => FavoriteProvider())
+          ChangeNotifierProvider(create: (context) => FavoriteProvider()),
+          ChangeNotifierProvider(create: (context) => BrowseProvider()),
+          ChangeNotifierProvider(create: (context) => PreferenceProvider())
         ],
         child: MaterialApp(
           title: 'Cooking Panda',

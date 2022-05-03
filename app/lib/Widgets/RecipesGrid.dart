@@ -1,5 +1,4 @@
 import 'package:app/Models/Recipe.dart';
-import 'package:app/Widgets/BackToTop.dart';
 import 'package:app/Widgets/RecipeCard.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,11 @@ class RecipesGrid extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, crossAxisSpacing: 2.0, mainAxisSpacing: 2.0),
         itemBuilder: (BuildContext context, int index) {
-          return RecipeCard(height: 200, width: 150, recipe: recipes[index]);
+          return RecipeCard(
+            recipe: recipes[index],
+            width: 175,
+            height: 200,
+          );
         });
   }
 }
