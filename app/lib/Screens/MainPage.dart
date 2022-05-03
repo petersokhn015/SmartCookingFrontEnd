@@ -1,4 +1,5 @@
 import 'package:app/Providers/FavoritesProvider.dart';
+import 'package:app/Providers/PreferencesProvider.dart';
 import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/Camera.dart';
 import 'package:app/Utils/AppColors.dart';
@@ -20,6 +21,7 @@ class MainPage extends StatefulWidget {
 
 bool isDark = false;
 bool isLoggedIn = true;
+bool isSignedUp = true;
 IconData _iconLight = Icons.light_mode;
 IconData _iconDark = Icons.dark_mode;
 
@@ -49,13 +51,17 @@ class _MainPageState extends State<MainPage> {
     prefs = await SharedPreferences.getInstance();
     isDark = await prefs!.getBool(prefs_DarkMode)!;
     isLoggedIn = await prefs!.getBool(prefs_isLoggedIn)!;
+    isSignedUp = await prefs!.getBool(prefs_isSignedUp)!;
   }
 
   @override
   Widget build(BuildContext context) {
     Provider.of<FavoriteProvider>(context, listen: false)
         .setFavorites(Provider.of<UserProvider>(context).savedId);
-    if (isLoggedIn == true) {
+
+    Provider.of<PreferenceProvider>(context, listen: false)
+        .setUserPreferences(Provider.of<UserProvider>(context).savedUsername);
+    if (isLoggedIn == true || isSignedUp == true) {
       return MaterialApp(
         theme: isDark ? _DarkTheme : _LightTheme,
         home: SafeArea(

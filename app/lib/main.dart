@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app/Providers/FavoritesProvider.dart';
 import 'package:app/Providers/HomeProvider.dart';
+import 'package:app/Providers/PreferencesProvider.dart';
 import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/SplashScreen.dart';
 import 'package:app/Services/MyHttpOverrides.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => HomeProvider()),
           ChangeNotifierProvider(create: (context) => UserProvider()),
+          ChangeNotifierProvider(create: (context) => PreferenceProvider()),
           ChangeNotifierProvider(create: (context) => FavoriteProvider())
         ],
         child: MaterialApp(
