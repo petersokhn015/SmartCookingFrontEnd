@@ -1,4 +1,5 @@
 import 'package:app/Models/Recipe.dart';
+import 'package:app/Providers/FavoritesProvider.dart';
 import 'package:app/Providers/HomeProvider.dart';
 import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Utils/AppColors.dart';
@@ -25,6 +26,11 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    if (Provider.of<HomeProvider>(context).recommendedRecipes.isEmpty) {
+      Provider.of<HomeProvider>(context, listen: false).setRecommendedRecipes(
+          Provider.of<FavoriteProvider>(context).favorites);
+    }
+
     return SafeArea(
         child: Scaffold(
             body: SingleChildScrollView(
