@@ -76,6 +76,7 @@ class _myPreferencesState extends State<myPreferences> {
                             title: Text(key),
                             value: preference.diet[key],
                             onChanged: (bool? value) {},
+                            activeColor: primaryColor,
                           );
                         }).toList(),
                       ),
@@ -108,6 +109,7 @@ class _myPreferencesState extends State<myPreferences> {
                             title: Text(key),
                             value: preference.intolerance[key],
                             onChanged: (bool? value) {},
+                            activeColor: primaryColor,
                           );
                         }).toList(),
                       ),
@@ -140,6 +142,7 @@ class _myPreferencesState extends State<myPreferences> {
                             title: Text(key),
                             value: preference.mealtype[key],
                             onChanged: (bool? value) {},
+                            activeColor: primaryColor,
                           );
                         }).toList(),
                       ),
@@ -172,6 +175,7 @@ class _myPreferencesState extends State<myPreferences> {
                             title: Text(key),
                             value: preference.cuisinetype[key],
                             onChanged: (bool? value) {},
+                            activeColor: primaryColor,
                           );
                         }).toList(),
                       ),

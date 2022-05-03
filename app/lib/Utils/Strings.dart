@@ -7,6 +7,7 @@ const caloriesIcon = "assets/CaloriesIcon.png";
 const cookTimeIcon = "assets/CookTimeIcon.png";
 const servingsIcon = "assets/ServingsIcon.png";
 const filterIcon = "assets/FilterIcon.png";
+const errorImage = "assets/imageError.jpg";
 
 const prefs_Username = "Username";
 const prefs_DarkMode = "DarkMode";

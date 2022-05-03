@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                           padding: const EdgeInsets.all(8.0),
                           child: Consumer<UserProvider>(
                             builder: (context, value, child) => Text(
-                                "Welcome Back \n" +
+                                "Welcome, \n" +
                                     Provider.of<UserProvider>(context)
                                         .savedUsername,
                                 style: TextStyle(
