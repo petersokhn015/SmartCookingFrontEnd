@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  final double? width;
-  final double? height;
+  final double width;
+  final double height;
 
-  RecipeCard({required this.recipe, this.width, this.height});
+  RecipeCard({required this.recipe, required this.width, required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class RecipeCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: SizedBox(
-                          width: width! / 1.2,
+                          width: width - 20,
                           child: Text(
                             recipe.title,
                             style: TextStyle(

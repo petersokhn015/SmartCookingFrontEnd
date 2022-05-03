@@ -13,7 +13,6 @@ class DropdownContentTile extends StatefulWidget {
 }
 
 class _DropdownContentTileState extends State<DropdownContentTile> {
-  List<bool> isChecked = [];
   List<Widget> widgets = [];
 
   @override
@@ -23,17 +22,16 @@ class _DropdownContentTileState extends State<DropdownContentTile> {
           .map((value) => {
                 widgets.add(
                   ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 40),
+                    constraints: BoxConstraints(maxHeight: 50),
                     child: CheckboxListTile(
                       title: Text(
                         value,
                         style: TextStyle(color: changeTextColor(context)),
                       ),
                       value: false,
-                      onChanged: (newValue) {
-                        setState(() {});
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (newValue) {},
+                      activeColor: primaryColor,
+                      controlAffinity: ListTileControlAffinity.trailing,
                     ),
                   ),
                 )

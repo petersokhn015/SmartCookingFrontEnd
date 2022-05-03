@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:app/Models/DetailedRecipe.dart';
 import 'package:app/Models/Recipe.dart';
 
@@ -5,16 +8,17 @@ import 'package:app/Utils/AppSettings.dart';
 import 'package:dio/dio.dart';
 
 class RecipeServices {
-  Dio dio = Dio();
+  Dio _dio = Dio();
 
-  Future<List<Recipe>> getRandomRecipes(int recipeCount) async {
+  Future<List<Recipe>> getRandomRecipes() async {
     List<Recipe> recipes = [];
     try {
-      Response response = await dio.get(RecipeEndpoint +
-          "RandomRecipes?recipeCount=" +
-          recipeCount.toString());
-      var data = response.data as List;
-      recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+      Response response = await _dio.get(RecipeEndpoint + "/RandomRecipes");
+
+      if (response.statusCode == 200) {
+        var data = response.data as List;
+        recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+      }
     } catch (e) {
       print(e);
     }
@@ -23,31 +27,34 @@ class RecipeServices {
 
   Future<DetailedRecipe?> getDetailedRecipe(int recipeId) async {
     try {
-      Response response = await dio.get(
-          RecipeEndpoint + "RecipeDetails?recipeId=" + recipeId.toString());
-      DetailedRecipe recipe = DetailedRecipe.fromMap(response.data);
-      return recipe;
+      Response response = await _dio.get(
+          RecipeEndpoint + "/RecipeDetails?recipeId=" + recipeId.toString());
+
+      if (response.statusCode == 200) {
+        DetailedRecipe recipe = DetailedRecipe.fromMap(response.data);
+        return recipe;
+      }
     } catch (e) {
       print(e);
       return null;
     }
+  }
 
   Future<List<Recipe>> getRecipesByIngredients(List<String> ingredients) async {
     List<Recipe> recipes = [];
     try {
-      int i = 0;
-      String ingredient = '';
-      for (var element in ingredients) {
-        if (i >= ingredients.length) {
-          ingredient += "ingredients=" + element;
-        }
-        ingredient += "ingredients=" + element + "&";
-        i++;
+      Response response = await _dio.post(
+        RecipeEndpoint + "/RecipeByIngredient",
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        }),
+        data: ingredients,
+      );
+
+      if (response.statusCode == 200) {
+        var data = response.data as List;
+        recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
       }
-
-      Response response = await _dio.get(RecipeEndpoint + ingredient);
-      var data = response.data as List;
-
     } on DioError catch (e) {
       if (e.response != null) {
         print('Dio error!');
@@ -59,6 +66,21 @@ class RecipeServices {
         print('Error sending request!');
         print(e.message);
       }
+    }
+    return recipes;
+  }
+
+  Future<List<Recipe>> getRecipeByTime() async {
+    List<Recipe> recipes = [];
+    try {
+      Response response = await _dio.get(RecipeEndpoint + "/RecipeByTime");
+
+      if (response.statusCode == 200) {
+        var data = response.data as List;
+        recipes = data.map<Recipe>((e) => Recipe.fromMap(e)).toList();
+      }
+    } catch (e) {
+      print(e);
     }
     return recipes;
   }

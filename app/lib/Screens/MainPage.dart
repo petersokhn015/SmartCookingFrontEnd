@@ -1,14 +1,13 @@
-import 'package:app/Screens/Browse.dart';
+import 'package:app/Providers/FavoritesProvider.dart';
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/Camera.dart';
-import 'package:app/Services/RecipeService.dart';
-
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Browse.dart';
 import 'Home.dart';
 import 'Profile.dart';
 
@@ -34,6 +33,7 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final _pageOptions = [Home(), Camera(), Profile()];
 
+  late String username;
   SharedPreferences? prefs;
 
   @override
@@ -50,8 +50,11 @@ class _MainPageState extends State<MainPage> {
     isDark = await prefs!.getBool(prefs_DarkMode)!;
     isLoggedIn = await prefs!.getBool(prefs_isLoggedIn)!;
   }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<FavoriteProvider>(context, listen: false)
+        .setFavorites(Provider.of<UserProvider>(context).savedId);
     if (isLoggedIn == true) {
       return MaterialApp(
         theme: isDark ? _DarkTheme : _LightTheme,
@@ -71,6 +74,7 @@ class _MainPageState extends State<MainPage> {
                     },
                     icon: Icon(isDark ? _iconDark : _iconLight)),
               ],
+              elevation: 0.2,
               centerTitle: true,
               title: Image(
                 image: AssetImage(appLogoNoText),
@@ -96,9 +100,7 @@ class _MainPageState extends State<MainPage> {
                   label: '',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.camera
-                  ),
+                  icon: Icon(Icons.camera),
                   label: '',
                 ),
                 BottomNavigationBarItem(

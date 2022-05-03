@@ -1,13 +1,12 @@
-import 'package:app/Screens/Home.dart';
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/MainPage.dart';
 import 'package:app/Screens/SignUp.dart';
 import 'package:app/Services/LoginService.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
-import 'package:app/Widgets/Button.dart';
-import 'package:app/Widgets/InputField.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -189,6 +188,11 @@ class _LoginState extends State<Login> {
 
                                       await prefs.setBool(
                                           prefs_isLoggedIn, true);
+
+                                      Provider.of<UserProvider>(context,
+                                              listen: false)
+                                          .saveUser(usernameController.text,
+                                              passwordController.text);
 
                                       Navigator.of(context).push(
                                           MaterialPageRoute(

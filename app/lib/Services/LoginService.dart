@@ -1,4 +1,3 @@
-import 'package:app/Models/User.dart';
 import 'package:app/Utils/AppSettings.dart';
 import 'package:dio/dio.dart';
 

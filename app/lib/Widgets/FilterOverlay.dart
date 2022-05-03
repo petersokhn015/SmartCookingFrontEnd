@@ -1,10 +1,11 @@
-import 'package:app/Services/RecipeService.dart';
+import 'package:app/Providers/BrowseProvider.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Widgets/DropdownContent.dart';
 import 'package:app/Widgets/DropdownContentTile.dart';
 import 'package:app/Widgets/Tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class FilterOverlay extends StatefulWidget {
   final VoidCallback onSaveCallback, onCancelCallback;
@@ -19,6 +20,9 @@ class FilterOverlay extends StatefulWidget {
 }
 
 class _FilterOverlayState extends State<FilterOverlay> {
+  TextEditingController cookTimeController = TextEditingController();
+  TextEditingController queryController = TextEditingController();
+
   List<DropDownItem> dietItems = [
     DropDownItem(
         body: DropdownContentTile(tags: [
@@ -81,41 +85,39 @@ class _FilterOverlayState extends State<FilterOverlay> {
                     color: primaryColor,
                     width: MediaQuery.of(context).size.width,
                     height: 60,
-                    child: Center(
-                      child: Text(
-                        'Filters',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: secondaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 10, 0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Filters',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                  color: secondaryColor),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.close),
+                            color: secondaryColor,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              applyFilter(context);
+                            },
+                            icon: Icon(Icons.check),
+                            color: secondaryColor,
+                          )
+                        ],
                       ),
                     ),
                   ),
                   SizedBox(
                     height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Tag(
-                        text: 'Cancel',
-                        isActive: false,
-                        isPressable: true,
-                        voidCallback: widget.onCancelCallback,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Tag(
-                        text: 'Save',
-                        isActive: true,
-                        isPressable: true,
-                        voidCallback: widget.onSaveCallback,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                    ],
                   ),
                   SizedBox(
                     height: 10,
@@ -198,6 +200,12 @@ class _FilterOverlayState extends State<FilterOverlay> {
       ));
     }
     return tagsList;
+  }
+
+  applyFilter(BuildContext context) {
+    if (cookTimeController.text.isNotEmpty)
+      Provider.of<BrowseProvider>(context).browseFilter.maxCookTime =
+          int.parse(cookTimeController.text);
   }
 }
 
