@@ -11,6 +11,12 @@ const filterIcon = "assets/FilterIcon.png";
 const prefs_Username = "Username";
 const prefs_DarkMode = "DarkMode";
 const prefs_isLoggedIn = "isLoggedIn";
+const prefs_isSignedUp = "isSignedUp";
+
+const userprefs_Diet = "Diet";
+const userprefs_Intolerance = "Intolerance";
+const userprefs_MealType = "MealType";
+const userprefs_CuisineType = "CuisineType";
 
 const lbl_Home = "Home";
 const lbl_Profile = "Profile";
@@ -33,3 +39,4 @@ const lbl_Please_Get_the_Image = "Please Get the Image";
 const lbl_Pick_Image = "Pick Image";
 const lbl_Get_Recipe = "Get Recipe";
 const lbl_Save = "Save";
+const lbl_Edit = "Edit";

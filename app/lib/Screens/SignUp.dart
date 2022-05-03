@@ -1,9 +1,13 @@
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/Login.dart';
 import 'package:app/Screens/SetPreferences.dart';
 import 'package:app/Services/SignUpService.dart';
 import 'package:app/Utils/AppColors.dart';
+import 'package:app/Utils/Strings.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:show_more_text_popup/show_more_text_popup.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -212,12 +216,22 @@ class _SignUpState extends State<SignUp> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
                               onTap: () async {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+
                                 if (formKey.currentState!.validate()) {
                                   var isSignedUp = await _signUpService.SignUp(
                                       usernameController.text,
                                       passwordController.text);
 
                                   if (isSignedUp == true) {
+                                    Provider.of<UserProvider>(context,
+                                            listen: false)
+                                        .saveUser(usernameController.text,
+                                            passwordController.text);
+
+                                    prefs.setBool(prefs_isSignedUp, true);
+
                                     Fluttertoast.showToast(
                                         msg: "Signed Up Successfully",
                                         toastLength: Toast.LENGTH_SHORT,
@@ -285,6 +299,9 @@ class _SignUpState extends State<SignUp> {
                       ),
                     )
                   ],
+                ),
+                SizedBox(
+                  height: 20,
                 )
               ],
             ),
