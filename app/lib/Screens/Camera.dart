@@ -129,10 +129,22 @@ class _CameraState extends State<Camera> {
                         backgroundColor: primaryColor,
                         heroTag: lbl_Get_Recipe,
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Browse(
-                                    ingredientList: ingredients,
-                                  )));
+                          if (ingredients.isNotEmpty) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Browse(
+                                      ingredientList: ["chicken"],
+                                    )));
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "Ingredients cannot be empty",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: tertiaryColor,
+                                textColor: secondaryColor,
+                                fontSize: 16.0);
+                          }
+
                           // Navigator.of(context).push(MaterialPageRoute(
                           //     builder: (context) => SetPreferences()));
                         },
