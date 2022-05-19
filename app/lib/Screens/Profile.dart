@@ -1,11 +1,14 @@
+import 'package:app/Providers/UserProvider.dart';
 import 'package:app/Screens/Favorites.dart';
 import 'package:app/Screens/MyPreferences.dart';
+import 'package:app/Screens/SetPreferences.dart';
 import 'package:app/Utils/AppColors.dart';
 import 'package:app/Utils/Strings.dart';
 import 'package:app/Widgets/AccesButton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
@@ -17,7 +20,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   String username = '';
-  SharedPreferences? prefs;
 
   @override
   void initState() {
@@ -29,8 +31,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> initializePreference() async {
-    prefs = await SharedPreferences.getInstance();
-    username = await prefs!.getString(prefs_Username)!;
+    username = Provider.of<UserProvider>(context, listen: false).savedUsername;
   }
 
   @override
@@ -107,7 +108,10 @@ class _ProfileState extends State<Profile> {
                   AccesButton(
                     title: lbl_My_Account,
                     icon: FeatherIcons.user,
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => myPreferences()));
+                    },
                   ),
                   SizedBox(
                     height: 10,

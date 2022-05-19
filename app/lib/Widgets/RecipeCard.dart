@@ -1,6 +1,8 @@
 import 'package:app/Models/Recipe.dart';
 import 'package:app/Screens/RecipeDetails.dart';
 import 'package:app/Utils/AppColors.dart';
+import 'package:app/Utils/Strings.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
@@ -37,8 +39,14 @@ class RecipeCard extends StatelessWidget {
                       stops: [0, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter),
-                  image: DecorationImage(
-                    image: NetworkImage(recipe.image),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Image.asset(errorImage),
+                    imageUrl: recipe.image,
                     fit: BoxFit.cover,
                   ),
                 ),
